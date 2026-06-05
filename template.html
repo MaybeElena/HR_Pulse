@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HR Pulse</title>
+    <!-- Fonts load from CDN with graceful fallback so the page still looks right offline. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0d1014;
+        --bg-accent: #171c23;
+        --panel: rgba(20, 24, 31, 0.92);
+        --panel-border: rgba(255, 255, 255, 0.08);
+        --text: #eef2f7;
+        --muted: #a1acb8;
+        --soft: #7f8996;
+        --highlight: #d7f36a;
+        --highlight-soft: rgba(215, 243, 106, 0.12);
+        --tag: #25303d;
+        --tag-text: #cfe0f1;
+        --quote: #ffd58c;
+        --rising: #8ce6a1;
+        --cooling: #f0a3a3;
+        --steady: #cdd6e0;
+        --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        --serif: "Fraunces", Georgia, "Times New Roman", serif;
+        --sans: "IBM Plex Sans", "Avenir Next", "Segoe UI", sans-serif;
+      }
+      * { box-sizing: border-box; }
+      html { color-scheme: dark; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at top left, rgba(215, 243, 106, 0.08), transparent 32%),
+          radial-gradient(circle at top right, rgba(92, 135, 255, 0.12), transparent 28%),
+          linear-gradient(180deg, var(--bg-accent) 0%, var(--bg) 48%, #090b0e 100%);
+        color: var(--text);
+        font-family: var(--sans);
+        line-height: 1.55;
+      }
+      .shell { width: min(1000px, calc(100% - 32px)); margin: 0 auto; padding: 48px 0 72px; }
+      .hero {
+        padding: 30px 30px 24px;
+        border: 1px solid var(--panel-border);
+        border-radius: 24px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(14px);
+      }
+      .eyebrow { color: var(--muted); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.14em; }
+      h1 {
+        margin: 12px 0 16px;
+        font-family: var(--serif);
+        font-weight: 600;
+        font-size: clamp(2.6rem, 6vw, 4.6rem);
+        line-height: 0.92;
+        letter-spacing: -0.02em;
+      }
+      .lede { max-width: 64ch; margin: 0 0 18px; color: #d4dbe3; font-size: 1.05rem; }
+      .meta { display: flex; flex-wrap: wrap; gap: 10px; font-size: 0.9rem; color: var(--muted); }
+      .meta span { display: inline-flex; align-items: center; padding: 7px 12px; border-radius: 999px; background: rgba(255, 255, 255, 0.04); }
+
+      /* Tabs */
+      .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 4px; }
+      .tab {
+        font-family: var(--sans);
+        font-size: 0.92rem; font-weight: 600;
+        color: var(--muted); cursor: pointer;
+        padding: 10px 16px; border-radius: 999px;
+        border: 1px solid var(--panel-border);
+        background: rgba(255, 255, 255, 0.03);
+        transition: all 0.15s ease;
+      }
+      .tab:hover { color: var(--text); border-color: rgba(255,255,255,0.18); }
+      .tab[aria-selected="true"] {
+        color: #0d1014; background: var(--highlight);
+        border-color: var(--highlight);
+      }
+      .tab .n { opacity: 0.6; font-weight: 500; margin-left: 6px; }
+
+      .panel { margin-top: 18px; display: none; animation: fade 0.3s ease both; }
+      .panel.active { display: grid; gap: 16px; }
+      @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+      .range-note { color: var(--soft); font-size: 0.9rem; margin: 2px 2px 0; }
+
+      /* Topic cards */
+      .card {
+        padding: 24px; border: 1px solid var(--panel-border);
+        border-radius: 22px; background: var(--panel); box-shadow: var(--shadow);
+        animation: fade 0.4s ease both;
+      }
+      .card-head { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 8px; }
+      .count { color: var(--soft); font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; }
+      h2 { margin: 0; font-family: var(--serif); font-weight: 600; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.05; letter-spacing: -0.01em; }
+      .status {
+        padding: 6px 11px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;
+        letter-spacing: 0.06em; text-transform: uppercase;
+        background: var(--highlight-soft); color: var(--highlight); border: 1px solid rgba(215, 243, 106, 0.28);
+      }
+      .mom, .live { font-size: 0.74rem; font-weight: 600; padding: 4px 9px; border-radius: 999px; }
+      .mom.rising, .live.active { color: var(--rising); background: rgba(140, 230, 161, 0.1); }
+      .mom.cooling, .live.quiet { color: var(--cooling); background: rgba(240, 163, 163, 0.1); }
+      .mom.steady { color: var(--steady); background: rgba(205, 214, 224, 0.08); }
+      .live.slowing { color: var(--quote); background: rgba(255, 213, 140, 0.12); }
+      .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 14px; }
+      .pill { padding: 5px 10px; border-radius: 999px; background: var(--tag); color: var(--tag-text); font-size: 0.78rem; }
+      .card p { margin: 0 0 12px; }
+      blockquote { margin: 16px 0; padding: 13px 16px; border-left: 3px solid var(--quote); background: rgba(255, 213, 140, 0.06); color: #ffe8bd; border-radius: 0 10px 10px 0; }
+      .change { color: var(--muted); font-size: 0.9rem; margin: 0 0 12px; }
+      .change strong { color: var(--highlight); }
+      .sources { margin-top: 14px; color: var(--muted); font-size: 0.92rem; }
+      .sources strong { color: var(--text); }
+      a { color: #c5ddff; text-decoration: none; }
+      a:hover { text-decoration: underline; }
+
+      /* Social cards */
+      .social .card-head { margin-bottom: 6px; }
+      .platforms { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 10px; }
+      .platforms .pill { background: rgba(92, 135, 255, 0.14); color: #cdddff; }
+      .live-meta { color: var(--muted); font-size: 0.84rem; margin: 0 0 12px; font-variant-numeric: tabular-nums; }
+      .sentiment { color: var(--muted); font-size: 0.9rem; margin: 8px 0 0; }
+      .sentiment strong { color: var(--text); }
+
+      /* Newsletter cards */
+      .cadence { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; background: rgba(255,255,255,0.05); color: var(--muted); }
+      .issue-meta { color: var(--muted); font-size: 0.88rem; margin: 6px 0 12px; }
+      .issue-meta strong { color: var(--text); }
+
+      /* All-news feed */
+      .feed { display: block !important; }
+      .feed-row {
+        display: flex; gap: 14px; align-items: baseline;
+        padding: 16px 4px; border-bottom: 1px solid var(--panel-border);
+      }
+      .feed-row:last-child { border-bottom: none; }
+      .feed-time { flex: 0 0 64px; color: var(--soft); font-size: 0.82rem; font-variant-numeric: tabular-nums; }
+      .feed-main { flex: 1 1 auto; }
+      .feed-main a { color: var(--text); font-weight: 600; }
+      .feed-blurb { margin-top: 5px; color: #c4cdd8; font-size: 0.92rem; }
+      .feed-meta { margin-top: 6px; color: var(--muted); font-size: 0.82rem; }
+      .tier { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 7px; border-radius: 6px; margin-right: 6px; }
+      .tier.wire { background: rgba(215, 243, 106, 0.16); color: var(--highlight); }
+      .tier.trade { background: rgba(92, 135, 255, 0.16); color: #bcd2ff; }
+      .tier.social { background: rgba(255, 213, 140, 0.14); color: var(--quote); }
+      .also { color: var(--soft); }
+
+      .footer-note { margin-top: 28px; padding: 18px 20px; border: 1px solid var(--panel-border); border-radius: 18px; background: rgba(255, 255, 255, 0.03); color: var(--muted); }
+      .footer-note strong { color: var(--text); }
+
+      @media (max-width: 700px) {
+        .shell { width: calc(100% - 20px); padding-top: 20px; }
+        .hero, .card { padding: 20px; }
+        .feed-time { flex-basis: 52px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div class="eyebrow" id="eyebrow"></div>
+        <h1 id="title"></h1>
+        <p class="lede" id="lede" hidden></p>
+        <div class="meta" id="meta"></div>
+      </section>
+
+      <nav class="tabs" id="tabs" role="tablist"></nav>
+      <div id="panels"></div>
+
+      <section class="footer-note" id="watch" hidden></section>
+    </main>
+
+    <!--
+      ===========================================================================
+      DATA  -  Codex replaces everything inside this object each run.
+      Keep the same keys. The sample below documents the exact shape.
+        eyebrow : a short kicker; do NOT repeat the title in it
+        lede    : optional; omit unless there is a real through-line worth stating
+        ranges.today / .week / .month : arrays of topic cards (heat-ranked)
+        tags    : plain strings, shown as labels (not links)
+        quote   : include ONLY a real verbatim quote from a source; else null.
+                  Never invent a quote.
+        tieIn   : reserved for later, NOT shown on the public page. Leave null.
+        social  : 4 to 6 live discussions. A discussion qualifies if posted within
+                  72h OR last comment within 24h. Show posted, lastActivity, and
+                  liveness ("active" | "slowing" | "quiet"). Describe what is
+                  happening; do not tell the reader how to use it.
+        newsletters : the watchlist's latest issues. Mark NEW only when a new
+                  issue appeared since last run (from nl-update). Summarize in
+                  your own words, skip vendor product pitches, link-only if the
+                  issue cannot be retrieved.
+        feed    : the persisted rolling buffer from `ledger.py feed-show`, NOT
+                  just today's gather. Each row: key, headline, blurb
+                  (information only, do NOT name the source), source, tier, url,
+                  also, ts. Deduped, canonical = most reliable source. The page
+                  ages each row from ts, so a 2-day-old story reads "2d ago".
+        watch   : the "Worth watching next" footer. Keep it.
+      Write like an industry journalist: plain, concrete, informative, HR/TM
+      terms intact. No fluff, no meta, no editorializing. Never paste paragraphs.
+      ===========================================================================
+    -->
+    <script id="data" type="application/json">
+    {
+      "title": "HR Pulse",
+      "eyebrow": "What HR and talent media are covering",
+      "date": "June 5, 2026",
+      "edition": "Daily edition",
+      "ranges": {
+        "today": [
+          {
+            "title": "AI becomes the default reason for layoffs",
+            "status": "NEW", "momentum": null, "liveDays": null,
+            "tags": ["AI", "Layoffs", "Tech", "Workforce planning"],
+            "summary": "AI is now the reason employers most often give for cutting jobs, topping Challenger's tally for the third month running. Recruiters and laid-off workers are pushing back, reading the label as cover for ordinary restructuring, cost cutting, and offshoring rather than real automation.",
+            "quote": null,
+            "sources": [
+              { "name": "Challenger", "url": "#" },
+              { "name": "Axios", "url": "#" },
+              { "name": "Reuters", "url": "#" },
+              { "name": "r/stocks", "url": "#" }
+            ],
+            "tieIn": null, "change": null
+          },
+          {
+            "title": "Hiring holds up, but matching gets harder",
+            "status": "NEW", "momentum": null, "liveDays": null,
+            "tags": ["Hiring", "Labor market", "Skills gap", "BLS"],
+            "summary": "Job openings rose to 7.6 million and payrolls added 172,000 in the latest reports, with unemployment steady at 4.3 percent. The problem is matching, not demand: employers cannot fill AI-adjacent roles fast enough, and smaller firms lack the hiring pull of the largest names.",
+            "quote": null,
+            "sources": [
+              { "name": "BLS JOLTS", "url": "#" },
+              { "name": "BLS Employment Situation", "url": "#" },
+              { "name": "SHRM", "url": "#" }
+            ],
+            "tieIn": null, "change": null
+          }
+        ],
+        "week": [
+          {
+            "title": "Recruiting shifts to skills-first and learning-first",
+            "status": "STILL HOT", "momentum": "rising", "liveDays": 6,
+            "tags": ["Recruiting", "Skills-based hiring", "L&D", "HR ops"],
+            "summary": "Trade coverage this week has moved past AI hype to how hiring actually works. Resumes and interviews are losing value as signals, while training and workforce readiness climb as roles get more complex and slower hiring pushes teams to build skills in-house.",
+            "quote": null,
+            "sources": [
+              { "name": "SHRM", "url": "#" },
+              { "name": "HR Dive", "url": "#" },
+              { "name": "Josh Bersin", "url": "#" }
+            ],
+            "tieIn": null, "change": null
+          }
+        ],
+        "month": [
+          {
+            "title": "EU AI Act hiring rules firm up before enforcement",
+            "status": "UPDATED", "momentum": "rising", "liveDays": 24,
+            "tags": ["Regulation", "EU AI Act", "Compliance", "Hiring"],
+            "summary": "The EU AI Act's rules for high-risk hiring tools are moving from proposal to firm dates, and trade press is spelling out what compliance will mean for talent teams. Law-firm alerts and the IAPP tracker carry the detail behind the headlines.",
+            "quote": null,
+            "sources": [
+              { "name": "EUR-Lex", "url": "#" },
+              { "name": "IAPP", "url": "#" },
+              { "name": "Littler", "url": "#" }
+            ],
+            "tieIn": null,
+            "change": "a confirmed enforcement date, up from a proposed one last month"
+          }
+        ]
+      },
+      "social": [
+        {
+          "title": "Workers read \"AI cut my job\" as code for offshoring",
+          "platforms": ["r/recruiting", "r/cscareerquestions", "LinkedIn"],
+          "posted": "2d ago", "lastActivity": "20m ago", "liveness": "active",
+          "summary": "The sharpest thread of the week is open skepticism about the AI-layoff story. Recruiters and candidates argue the label often hides cost cutting and relocation, and they want employers to be straight about it. Still drawing fresh comments two days after it was posted.",
+          "sentiment": "Skeptical, frustrated, wants honesty from employers",
+          "threads": [
+            { "name": "\"Be honest, it's not AI\" (r/recruiting, 2.1k upvotes)", "url": "#" },
+            { "name": "Laid off, told it was AI (r/cscareerquestions)", "url": "#" }
+          ]
+        },
+        {
+          "title": "What skills-based hiring looks like in practice",
+          "platforms": ["r/humanresources", "LinkedIn"],
+          "posted": "2d ago", "lastActivity": "4h ago", "liveness": "active",
+          "summary": "A steady, practical discussion: HR practitioners trading how skills-first hiring works on the ground, where it breaks down, and how they assess candidates without a resume.",
+          "sentiment": "Pragmatic, solution-seeking",
+          "threads": [
+            { "name": "How are you actually testing for skills? (r/humanresources)", "url": "#" },
+            { "name": "We dropped degree requirements, here is what happened (LinkedIn)", "url": "#" }
+          ]
+        },
+        {
+          "title": "Deepfake and proxy candidates in remote interviews",
+          "platforms": ["r/recruiting", "r/ITManagers", "LinkedIn"],
+          "posted": "1d ago", "lastActivity": "1h ago", "liveness": "active",
+          "summary": "Recruiters are swapping stories about candidates using deepfake video or a stand-in during remote interviews, especially for technical roles. Interest in identity checks and live-task screening is climbing.",
+          "sentiment": "Alarmed, comparing defenses",
+          "threads": [
+            { "name": "Caught a deepfake in a final-round interview (r/recruiting)", "url": "#" },
+            { "name": "How are you verifying who you actually hire? (r/ITManagers)", "url": "#" }
+          ]
+        },
+        {
+          "title": "Recruiter burnout as open reqs pile up",
+          "platforms": ["r/recruiting", "r/humanresources"],
+          "posted": "2d ago", "lastActivity": "9h ago", "liveness": "slowing",
+          "summary": "With teams cut and openings rising, in-house recruiters are posting about heavier req loads and slower approvals, and trading tactics for keeping up. Comment pace has eased since yesterday.",
+          "sentiment": "Tired, venting, trading tactics",
+          "threads": [
+            { "name": "40 open reqs, one recruiter (r/recruiting)", "url": "#" },
+            { "name": "How many reqs is too many? (r/humanresources)", "url": "#" }
+          ]
+        }
+      ],
+      "newsletters": [
+        { "name": "This Week in Recruiting", "cadence": "Weekly", "status": "NEW",
+          "issueTitle": "Skills-first hiring and the AI-layoff backlash", "issueDate": "Jun 2",
+          "summary": "Tracks the pushback on AI as a stated layoff reason, a roundup of skills-based hiring experiments, and a note on slower time-to-fill at mid-market employers.",
+          "url": "https://www.linkedin.com/newsletters/this-week-in-recruiting-6779688850651414530",
+          "sourceNote": "Via Recruiting Brainfood" },
+        { "name": "Data-Driven HR Monthly", "cadence": "Monthly", "status": "",
+          "issueTitle": "Workforce planning under uncertainty", "issueDate": "May 28",
+          "summary": "Covers headcount planning when forecasts are shaky, metrics for internal mobility, and a short piece on measuring quality of hire.",
+          "url": "https://www.linkedin.com/newsletters/data-driven-hr-monthly-6793421002836590592",
+          "sourceNote": "Open on LinkedIn" },
+        { "name": "The Eightfold Take", "cadence": "Biweekly", "status": "",
+          "issueTitle": "Talent intelligence and the skills graph", "issueDate": "May 30",
+          "summary": "Editorial take on skills-based talent decisions and internal mobility. Product-pitch sections skipped.",
+          "url": "https://www.linkedin.com/newsletters/the-eightfold-take-7260354048741011458",
+          "sourceNote": "Vendor newsletter, editorial only" },
+        { "name": "HR Leaders Podcast", "cadence": "Weekly", "status": "NEW",
+          "issueTitle": "Building an AI-ready people function", "issueDate": "Jun 3",
+          "summary": "This week's episode covers upskilling people teams for AI, governance of hiring tools, and what CHROs are prioritizing for 2026.",
+          "url": "https://www.linkedin.com/newsletters/hr-leaders-podcast-6874375003840765952",
+          "sourceNote": "Via HR Leaders podcast feed" },
+        { "name": "SmartHorizons", "cadence": "Monthly", "status": "",
+          "issueTitle": null, "issueDate": null, "summary": null,
+          "url": "https://www.linkedin.com/newsletters/smarthorizons-7159262810659577858",
+          "sourceNote": "Open on LinkedIn" }
+      ],
+      "feed": [
+        { "time": "2h", "headline": "AI named top reason for job cuts for a third straight month", "blurb": "AI again leads the monthly count of cited layoff causes, though the label often bundles in restructuring and cost cutting.", "source": "Challenger", "tier": "wire", "url": "#", "also": ["Axios", "Reuters"] },
+        { "time": "4h", "headline": "Payrolls add 172,000; unemployment holds at 4.3%", "blurb": "Steady hiring and flat unemployment undercut the idea of a broad labor-market slide.", "source": "BLS", "tier": "wire", "url": "#", "also": ["Bloomberg", "CNBC"] },
+        { "time": "6h", "headline": "Job openings climb to 7.6 million as hires lag", "blurb": "Openings rose while the hires rate stayed flat, a widening gap that points to a matching problem rather than weak demand.", "source": "BLS", "tier": "wire", "url": "#", "also": ["WSJ"] },
+        { "time": "Jun 4", "headline": "Training budgets rise as employers build instead of buy", "blurb": "Upskilling and internal mobility get more funding as hiring slows and roles grow more complex.", "source": "HR Dive", "tier": "trade", "url": "#", "also": [] },
+        { "time": "Jun 4", "headline": "Recruiting trends point to skills-first assessment", "blurb": "Resumes and interviews are losing trust as signals, with structured, skills-based screening offered as the alternative.", "source": "SHRM", "tier": "trade", "url": "#", "also": ["HR Executive"] },
+        { "time": "Jun 3", "headline": "Recruiters report deepfake candidates in remote interviews", "blurb": "Practitioner posts describe candidates faking video or using stand-ins, pushing teams toward identity checks and live tasks.", "source": "r/recruiting", "tier": "social", "url": "#", "also": ["LinkedIn"] },
+        { "time": "Jun 2", "headline": "EU AI Act hiring enforcement date moves closer", "blurb": "Updated guidance firms up the timeline for high-risk hiring tools and points to what talent teams will need to document.", "source": "EUR-Lex", "tier": "wire", "url": "#", "also": ["IAPP", "Littler"] }
+      ],
+      "watch": {
+        "label": "Worth watching next",
+        "text": "Fresh EU pay-transparency guidance landed this week ahead of the reporting deadline.",
+        "url": "#"
+      }
+    }
+    </script>
+
+    <script>
+      const DATA = JSON.parse(document.getElementById("data").textContent);
+      const el = (tag, cls, html) => {
+        const n = document.createElement(tag);
+        if (cls) n.className = cls;
+        if (html != null) n.innerHTML = html;
+        return n;
+      };
+      const esc = (s) => (s == null ? "" : String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])));
+      const linkList = (arr) => arr.map((s) => `<a href="${esc(s.url)}">${esc(s.name)}</a>`).join(", ");
+      const relTime = (ts, fallback) => {
+        if (!ts) return fallback || "";
+        const d = new Date(ts);
+        if (isNaN(d)) return fallback || String(ts);
+        const days = Math.floor((Date.now() - d.getTime()) / 86400000);
+        if (days <= 0) {
+          const h = Math.floor((Date.now() - d.getTime()) / 3600000);
+          return h >= 1 ? h + "h" : "now";
+        }
+        if (days === 1) return "1d ago";
+        if (days < 7) return days + "d ago";
+        return d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+      };
+
+      // Header
+      document.getElementById("eyebrow").textContent = DATA.eyebrow || "";
+      document.getElementById("title").textContent = DATA.title || "HR Pulse";
+      const ledeEl = document.getElementById("lede");
+      if (DATA.lede) { ledeEl.textContent = DATA.lede; ledeEl.hidden = false; }
+      const meta = document.getElementById("meta");
+      [DATA.date, DATA.edition].filter(Boolean).forEach((m) => meta.appendChild(el("span", null, esc(m))));
+
+      function topicCard(t, i) {
+        const card = el("article", "card");
+        card.style.animationDelay = i * 0.05 + "s";
+        const head = el("div", "card-head");
+        head.appendChild(el("h2", null, esc(t.title)));
+        if (t.status) {
+          const live = t.liveDays ? ` (live ${t.liveDays}d)` : "";
+          head.appendChild(el("span", "status", esc(t.status) + live));
+        }
+        if (t.momentum) head.appendChild(el("span", "mom " + t.momentum, esc(t.momentum)));
+        card.appendChild(el("div", "count", "Topic " + String(i + 1).padStart(2, "0")));
+        card.appendChild(head);
+        if (t.tags && t.tags.length) {
+          const tags = el("div", "tags");
+          t.tags.forEach((tag) => tags.appendChild(el("span", "pill", esc(tag))));
+          card.appendChild(tags);
+        }
+        card.appendChild(el("p", null, esc(t.summary)));
+        if (t.change) card.appendChild(el("p", "change", "What changed: <strong>" + esc(t.change) + "</strong>"));
+        if (t.quote && t.quote.text) card.appendChild(el("blockquote", null, "&ldquo;" + esc(t.quote.text) + "&rdquo;" + (t.quote.attribution ? ' <span class="also">&mdash; ' + esc(t.quote.attribution) + "</span>" : "")));
+        if (t.sources && t.sources.length) card.appendChild(el("div", "sources", "<strong>Sources:</strong> " + linkList(t.sources)));
+        return card;
+      }
+
+      function socialCard(s, i) {
+        const card = el("article", "card");
+        card.style.animationDelay = i * 0.05 + "s";
+        const head = el("div", "card-head");
+        head.appendChild(el("h2", null, esc(s.title)));
+        if (s.liveness) head.appendChild(el("span", "live " + s.liveness, esc(s.liveness)));
+        card.appendChild(head);
+        if (s.platforms) {
+          const p = el("div", "platforms");
+          s.platforms.forEach((pl) => p.appendChild(el("span", "pill", esc(pl))));
+          card.appendChild(p);
+        }
+        const bits = [];
+        if (s.posted) bits.push("Posted " + esc(s.posted));
+        if (s.lastActivity) bits.push("last reply " + esc(s.lastActivity));
+        if (bits.length) card.appendChild(el("div", "live-meta", bits.join(" &middot; ")));
+        card.appendChild(el("p", null, esc(s.summary)));
+        if (s.sentiment) card.appendChild(el("p", "sentiment", "<strong>Mood:</strong> " + esc(s.sentiment)));
+        if (s.threads && s.threads.length) card.appendChild(el("div", "sources", "<strong>Posts:</strong> " + linkList(s.threads)));
+        return card;
+      }
+
+      function newsletterCard(n, i) {
+        const card = el("article", "card");
+        card.style.animationDelay = i * 0.05 + "s";
+        const head = el("div", "card-head");
+        head.appendChild(el("h2", null, esc(n.name)));
+        if (n.status) head.appendChild(el("span", "status", esc(n.status)));
+        if (n.cadence) head.appendChild(el("span", "cadence", esc(n.cadence)));
+        card.appendChild(head);
+        const bits = [];
+        if (n.issueTitle) bits.push("Latest: <strong>" + esc(n.issueTitle) + "</strong>");
+        if (n.issueDate) bits.push(esc(n.issueDate));
+        if (bits.length) card.appendChild(el("div", "issue-meta", bits.join(" &middot; ")));
+        if (n.summary) card.appendChild(el("p", null, esc(n.summary)));
+        else card.appendChild(el("p", "range-note", "Latest issue not retrievable this run. Open it on LinkedIn for the full edition."));
+        if (n.url) card.appendChild(el("div", "sources", '<a href="' + esc(n.url) + '">' + esc(n.sourceNote || "Open newsletter") + "</a>"));
+        return card;
+      }
+
+      function feedRow(f) {
+        const row = el("div", "feed-row");
+        row.appendChild(el("div", "feed-time", esc(f.ts ? relTime(f.ts, f.time) : (f.time || ""))));
+        const main = el("div", "feed-main");
+        main.appendChild(el("div", null, `<a href="${esc(f.url)}">${esc(f.headline)}</a>`));
+        if (f.blurb) main.appendChild(el("div", "feed-blurb", esc(f.blurb)));
+        const tierCls = ["wire", "trade", "social"].includes(f.tier) ? f.tier : "trade";
+        let metaHtml = `<span class="tier ${tierCls}">${esc(f.source)}</span>`;
+        if (f.also && f.also.length) metaHtml += `<span class="also">also in ${f.also.map(esc).join(", ")}</span>`;
+        main.appendChild(el("div", "feed-meta", metaHtml));
+        row.appendChild(main);
+        return row;
+      }
+
+      // Build tabs + panels
+      const tabsEl = document.getElementById("tabs");
+      const panelsEl = document.getElementById("panels");
+      const ranges = DATA.ranges || {};
+      const defs = [
+        { id: "today", label: "Today", note: "Breaking, last 24 to 48 hours." },
+        { id: "week", label: "Last week", note: "Trending across the past 7 days." },
+        { id: "month", label: "Last month", note: "Durable themes, research, and regulation over 30 days." },
+        { id: "social", label: "Social", note: "Live discussions from the last few days. Shows when each was posted and last active." },
+        { id: "newsletters", label: "Newsletters", note: "Latest issue from each newsletter you track." },
+        { id: "feed", label: "All news", note: "Every story, deduped, most reliable source first." }
+      ];
+
+      const panels = {};
+      defs.forEach((d) => {
+        const tab = el("button", "tab");
+        tab.setAttribute("role", "tab");
+        tab.setAttribute("data-tab", d.id);
+        let count = 0;
+        if (d.id === "social") count = (DATA.social || []).length;
+        else if (d.id === "newsletters") count = (DATA.newsletters || []).length;
+        else if (d.id === "feed") count = (DATA.feed || []).length;
+        else count = (ranges[d.id] || []).length;
+        tab.innerHTML = esc(d.label) + (count ? ` <span class="n">${count}</span>` : "");
+
+        const panel = el("section", "panel" + (d.id === "feed" ? " feed" : ""));
+        panel.id = "panel-" + d.id;
+        if (d.note) panel.appendChild(el("div", "range-note", esc(d.note)));
+
+        if (d.id === "social") {
+          (DATA.social || []).forEach((s, i) => panel.appendChild(socialCard(s, i)));
+          if (!(DATA.social || []).length) panel.appendChild(el("p", "range-note", "No standout social discussions this run."));
+        } else if (d.id === "newsletters") {
+          (DATA.newsletters || []).forEach((n, i) => panel.appendChild(newsletterCard(n, i)));
+          if (!(DATA.newsletters || []).length) panel.appendChild(el("p", "range-note", "No newsletters tracked this run."));
+        } else if (d.id === "feed") {
+          const wrap = el("div", "card");
+          (DATA.feed || []).forEach((f) => wrap.appendChild(feedRow(f)));
+          if (!(DATA.feed || []).length) wrap.appendChild(el("p", "range-note", "Feed is empty this run."));
+          panel.appendChild(wrap);
+        } else {
+          (ranges[d.id] || []).forEach((t, i) => panel.appendChild(topicCard(t, i)));
+          if (!(ranges[d.id] || []).length) panel.appendChild(el("p", "range-note", "Nothing in this window. Try a deep run to reach further back."));
+        }
+
+        tab.addEventListener("click", () => select(d.id));
+        tabsEl.appendChild(tab);
+        panelsEl.appendChild(panel);
+        panels[d.id] = { tab, panel };
+      });
+
+      function select(id) {
+        Object.entries(panels).forEach(([k, v]) => {
+          const on = k === id;
+          v.tab.setAttribute("aria-selected", on ? "true" : "false");
+          v.panel.classList.toggle("active", on);
+        });
+      }
+      select("today");
+
+      // Watch footer
+      if (DATA.watch && DATA.watch.text) {
+        const w = document.getElementById("watch");
+        w.hidden = false;
+        w.innerHTML = "<strong>" + esc(DATA.watch.label || "Worth watching next") + ":</strong> " + esc(DATA.watch.text) + (DATA.watch.url ? ' <a href="' + esc(DATA.watch.url) + '">Read more</a>.' : "");
+      }
+    </script>
+  </body>
+</html>
