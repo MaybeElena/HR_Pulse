@@ -124,6 +124,7 @@
       .platforms { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 10px; }
       .platforms .pill { background: rgba(92, 135, 255, 0.14); color: #cdddff; }
       .live-meta { color: var(--muted); font-size: 0.84rem; margin: 0 0 12px; font-variant-numeric: tabular-nums; }
+      .social-quote { margin: 14px 0; }
       .sentiment { color: var(--muted); font-size: 0.9rem; margin: 8px 0 0; }
       .sentiment strong { color: var(--text); }
 
@@ -189,7 +190,8 @@
         social  : 4 to 6 live discussions. A discussion qualifies if posted within
                   72h OR last comment within 24h. Show posted, lastActivity, and
                   liveness ("active" | "slowing" | "quiet"). Describe what is
-                  happening; do not tell the reader how to use it.
+                  happening in concrete terms and include a short quote from the
+                  hottest linked post when it adds signal.
         newsletters : the watchlist's latest issues. Mark NEW only when a new
                   issue appeared since last run (from nl-update). Summarize in
                   your own words, skip vendor product pitches, link-only if the
@@ -478,7 +480,7 @@
       "posted": "1d ago",
       "lastActivity": "today",
       "liveness": "active",
-      "summary": "Reddit threads around the June 4 Challenger report are focused on whether AI is the real driver of cuts or the label companies are using while they reorganize and spend more on automation.",
+      "summary": "Reddit threads around the June 4 Challenger report are arguing over whether AI is the direct driver of cuts or the label companies are using while they reorganize and spend more on automation.",
       "sentiment": "Skeptical, anxious, arguing over cause versus cover story",
       "threads": [
         {
@@ -493,7 +495,11 @@
           "name": "US Tech Sector Announces Most Job Cuts in Nearly Two Years",
           "url": "https://www.reddit.com/r/cscareerquestions/comments/1twrshr/us_tech_sector_announces_most_job_cuts_in_nearly/"
         }
-      ]
+      ],
+      "quote": {
+        "text": "the real question we should focus on is just what all these people will do now that these jobs are gone / have left.",
+        "attribution": "RBTIshow comment on r/technology"
+      }
     },
     {
       "title": "Hiring managers say AI-generated applications are flooding the top of the funnel",
@@ -503,14 +509,18 @@
       "posted": "1d ago",
       "lastActivity": "today",
       "liveness": "active",
-      "summary": "A new sysadmin thread captures a complaint now spreading across hiring communities: applications are increasingly polished, vague, and harder to trust, which pushes more work back onto screening and evaluation.",
+      "summary": "Hiring managers are reporting that AI-generated applications are becoming harder to distinguish from strong real candidates, which is pushing more effort back into screening and evaluation.",
       "sentiment": "Frustrated, suspicious, focused on filtering tactics",
       "threads": [
         {
           "name": "Getting AI generated applications as a hiring manager... thoughts?",
           "url": "https://www.reddit.com/r/sysadmin/comments/1txtibv/getting_ai_generated_applications_as_a_hiring/"
         }
-      ]
+      ],
+      "quote": {
+        "text": "Virtually every single bullet point and text field is filled with worthless vague corpo-speak.",
+        "attribution": "post body, r/sysadmin"
+      }
     },
     {
       "title": "Recruiters are comparing ways to sort signal from volume",
@@ -520,14 +530,18 @@
       "posted": "last month",
       "lastActivity": "today",
       "liveness": "slowing",
-      "summary": "An older recruiting thread became active again on June 6 as practitioners kept swapping notes on overloaded funnels, AI-optimized resumes, and what now counts as credible evidence of fit.",
+      "summary": "Recruiters are comparing overloaded funnels, AI-optimized resumes, and the shrinking value of traditional screening signals as application volume stays high.",
       "sentiment": "Tired, practical, trading workflow fixes",
       "threads": [
         {
           "name": "I screened 400 applications last week and maybe 15 were actually qualified",
           "url": "https://www.reddit.com/r/recruiting/comments/1snh8g3/i_screened_400_applications_last_week_and_maybe/"
         }
-      ]
+      ],
+      "quote": {
+        "text": "Half the apps were clearly AI-generated cover letters with the wrong company name.",
+        "attribution": "post body, r/recruiting"
+      }
     },
     {
       "title": "HR practitioners keep testing where AI helps and where judgment still matters",
@@ -537,14 +551,18 @@
       "posted": "last week",
       "lastActivity": "today",
       "liveness": "slowing",
-      "summary": "A current discussion in r/humanresources stays grounded in everyday use cases such as drafting, scheduling, and interview support, while keeping compensation, employee relations, and legal-risk decisions in the hands of people leaders.",
+      "summary": "HR practitioners are using AI for drafting, scheduling, and interview support while keeping compensation, employee relations, and legal-risk decisions in the hands of people leaders.",
       "sentiment": "Pragmatic, cautious, comparing real use cases",
       "threads": [
         {
           "name": "how are we actually using AI in our HR work?",
           "url": "https://www.reddit.com/r/humanresources/comments/1tpue8x/how_are_we_actually_using_ai_in_our_hr_work_na/"
         }
-      ]
+      ],
+      "quote": {
+        "text": "I use it for reports. Our HRIS has its own SQL database and with Claude I’ve been able to vibe code up several reports.",
+        "attribution": "top comment, r/humanresources"
+      }
     },
     {
       "title": "Layoff communities keep comparing job-loss headlines with the still-positive jobs data",
@@ -554,26 +572,30 @@
       "posted": "2d ago",
       "lastActivity": "today",
       "liveness": "active",
-      "summary": "Layoff-focused threads are paying close attention to the contrast between large job-cut tallies and a national jobs report that still shows positive payroll growth. That mismatch is driving much of the current labor-market argument online.",
+      "summary": "Layoff communities are comparing large job-cut tallies with a national jobs report that still shows positive payroll growth, and that mismatch is driving much of the labor-market argument online.",
       "sentiment": "Worried, comparing macro data with lived experience",
       "threads": [
         {
           "name": "So far in 2026, there have been 363 layoffs at tech companies",
           "url": "https://www.reddit.com/r/Layoffs/comments/1tw7b9g/so_far_in_2026_there_have_been_363_layoffs_at/"
         }
-      ]
+      ],
+      "quote": {
+        "text": "This is also basically just public companies. Likely triple the number",
+        "attribution": "mrwhitewalker comment on r/Layoffs"
+      }
     }
   ],
   "newsletters": [
     {
       "name": "This Week in Recruiting",
       "cadence": "Weekly",
-      "status": "",
-      "issueTitle": "This Week, In Recruiting - Issue 267",
-      "issueDate": "May 11",
-      "summary": "Hung Lee's weekly roundup keeps candidate fraud, recruiter workflow pressure, and AI-heavy hiring conversations near the top of the agenda. The framing around resume inflation and authenticity problems still fits the recruiting mood this week.",
-      "url": "https://www.linkedin.com/newsletters/this-week-in-recruiting-6779688850651414530",
-      "sourceNote": "Open on LinkedIn"
+      "status": "NEW",
+      "issueTitle": "This Week, In Recruiting - Issue 270",
+      "issueDate": "June 1",
+      "summary": "Issue 270 argues that recruiting still needs human judgment in five concrete situations: high-collaboration roles, real-time candidate calibration, emotionally intense moments, high-stakes decisions for candidates, and high-stakes roles for the company. It also points readers to current recruiting events and candidate-fraud risk in AI-era hiring.",
+      "url": "https://www.linkedin.com/pulse/week-recruiting-issue-270-hung-lee-hj3ee/",
+      "sourceNote": "Indexed LinkedIn issue page"
     },
     {
       "name": "Data-Driven HR Monthly",
@@ -581,9 +603,9 @@
       "status": "",
       "issueTitle": "The best HR & People Analytics articles of May 2026",
       "issueDate": "May 31",
-      "summary": "The May edition argues that workforce cuts do not automatically produce AI returns and keeps returning to augmentation, skills-powered organizations, and stronger people analytics foundations. It also links workforce planning more directly to business value and execution.",
+      "summary": "The May edition highlights the World Economic Forum's May 2026 Chief People Officers' Outlook, a projected HR operating-model shift that cuts routine work from 60% to 20% of capacity, research linking stronger employee experience to better market performance, and a case for treating meetings as a system-design problem.",
       "url": "https://www.linkedin.com/pulse/best-hr-people-analytics-articles-may-2026-david-green--uw2oe",
-      "sourceNote": "Open on LinkedIn"
+      "sourceNote": "Indexed LinkedIn issue page"
     },
     {
       "name": "The Eightfold Take",
@@ -591,19 +613,19 @@
       "status": "",
       "issueTitle": "Your HR system knows everything about the past — and nothing about the future",
       "issueDate": "June 1",
-      "summary": "This editorial post pushes a theme that is still relevant for executive HR teams: workforce systems need to surface adjacent skills, internal mobility paths, and future capability gaps rather than only reporting historical hiring activity. Product-pitch sections are excluded here.",
+      "summary": "This June 1 piece argues for three practical shifts: identify talent beyond resume keywords, plan future skill gaps before shortages appear, and guide employees with personalized career paths tied to business needs. Product-pitch material is left out here.",
       "url": "https://eightfold.ai/blog/hr-system-talent-intelligence-future-workforce/",
       "sourceNote": "Publisher site"
     },
     {
       "name": "HR Leaders Podcast",
       "cadence": "Weekly",
-      "status": "",
-      "issueTitle": "How Talent Acquisition Is Being Completely Reinvented in 2026",
-      "issueDate": "Late May",
-      "summary": "This episode with PepsiCo's global talent acquisition leader focuses on redesigning the TA operating model around intelligence, enablement, and candidate experience instead of bolting AI onto old process steps.",
-      "url": "https://hrleaders.co/podcast/how-talent-acquisition-is-being-completely-reinvented-in-2026",
-      "sourceNote": "Via HR Leaders site"
+      "status": "NEW",
+      "issueTitle": "The AI Shift Every HR Leader Needs to Prepare for in 2026",
+      "issueDate": "June 4",
+      "summary": "The June 4 episode says AI transformation needs AI literacy across employees, leaders, and executives; hackathons and flagship use cases that turn learning into measurable business impact; and an HR team that stays close to employees while technology removes low-value tasks.",
+      "url": "https://hrleaders.co/podcast/the-ai-shift-every-hr-leader-needs-to-prepare-for-in-2026",
+      "sourceNote": "HR Leaders site"
     },
     {
       "name": "SmartHorizons",
@@ -613,7 +635,7 @@
       "issueDate": null,
       "summary": null,
       "url": "https://www.linkedin.com/newsletters/smarthorizons-7159262810659577858",
-      "sourceNote": "Open on LinkedIn"
+      "sourceNote": "No current public issue retrieved this run"
     }
   ],
   "feed": [
@@ -809,6 +831,7 @@
         if (s.lastActivity) bits.push("last reply " + esc(s.lastActivity));
         if (bits.length) card.appendChild(el("div", "live-meta", bits.join(" &middot; ")));
         card.appendChild(el("p", null, esc(s.summary)));
+        if (s.quote && s.quote.text) card.appendChild(el("blockquote", "social-quote", "&ldquo;" + esc(s.quote.text) + "&rdquo;" + (s.quote.attribution ? ' <span class=\"also\">&mdash; ' + esc(s.quote.attribution) + "</span>" : "")));
         if (s.sentiment) card.appendChild(el("p", "sentiment", "<strong>Mood:</strong> " + esc(s.sentiment)));
         if (s.threads && s.threads.length) card.appendChild(el("div", "sources", "<strong>Posts:</strong> " + linkList(s.threads)));
         return card;
