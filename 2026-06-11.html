@@ -86,6 +86,31 @@
 
       .panel { margin-top: 18px; display: none; animation: fade 0.3s ease both; }
       .panel.active { display: grid; gap: 16px; }
+      .subsection {
+        display: grid;
+        gap: 14px;
+      }
+      .subsection + .subsection {
+        margin-top: 10px;
+      }
+      .subsection-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 2px 4px 0;
+      }
+      .subsection-title {
+        margin: 0;
+        font-family: var(--serif);
+        font-size: 1.35rem;
+        line-height: 1.1;
+        letter-spacing: -0.01em;
+      }
+      .subsection-note {
+        color: var(--soft);
+        font-size: 0.86rem;
+      }
       @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
       .range-note { color: var(--soft); font-size: 0.9rem; margin: 2px 2px 0; }
 
@@ -182,7 +207,7 @@
       Keep the same keys. The sample below documents the exact shape.
         eyebrow : a short kicker; do NOT repeat the title in it
         lede    : optional; omit unless there is a real through-line worth stating
-        ranges.today / .week / .month : arrays of topic cards (heat-ranked)
+        ranges.freshToday / .stillFresh / .week / .month : arrays of topic cards
         tags    : plain strings, shown as labels (not links)
         quote   : include ONLY a real verbatim quote from a source; else null.
                   Never invent a quote.
@@ -213,94 +238,6 @@
   "date": "June 11, 2026",
   "edition": "Daily edition",
   "ranges": {
-    "today": [
-      {
-        "title": "Labor demand holds up while hiring frictions persist",
-        "status": "STILL HOT",
-        "momentum": "steady",
-        "liveDays": 6,
-        "tags": [
-          "Hiring",
-          "Labor market",
-          "Skills gap",
-          "BLS"
-        ],
-        "summary": "The Bureau of Labor Statistics reported on June 2 that April job openings rose to 7.6 million, then reported on June 5 that May payrolls increased by 172,000 and unemployment held at 4.3%. A same-day Conference Board brief said job creation remained concentrated in a narrow set of industries, keeping attention on hiring friction rather than a broad collapse in demand.",
-        "quote": null,
-        "sources": [
-          {
-            "name": "BLS JOLTS",
-            "url": "https://www.bls.gov/news.release/archives/jolts_06022026.htm"
-          },
-          {
-            "name": "BLS Employment Situation",
-            "url": "https://www.bls.gov/news.release/archives/empsit_06052026.htm"
-          },
-          {
-            "name": "Conference Board",
-            "url": "https://www.conference-board.org/research/labor-markets-briefs/jobs-report-insights-april-2026"
-          }
-        ],
-        "tieIn": null,
-        "change": null
-      },
-      {
-        "title": "AI remains central in layoff coverage",
-        "status": "STILL HOT",
-        "momentum": "steady",
-        "liveDays": 7,
-        "tags": [
-          "AI",
-          "Layoffs",
-          "Tech",
-          "Workforce planning"
-        ],
-        "summary": "Challenger, Gray & Christmas said on June 4 that planned U.S. job cuts rose to 97,006 in May, the highest May total since 2020, and that AI was the top cited reason for a third straight month. Coverage through June 6 kept the story active, with continued debate over how much of the reduction is tied to automation versus restructuring and spending pressure.",
-        "quote": null,
-        "sources": [
-          {
-            "name": "Challenger",
-            "url": "https://www.challengergray.com/blog/challenger-report-may-job-cuts-rise-16-from-april-highest-may-total-since-2020/"
-          },
-          {
-            "name": "Axios",
-            "url": "https://www.axios.com/2026/05/06/ai-layoff-coinbase"
-          },
-          {
-            "name": "AP",
-            "url": "https://apnews.com/article/65f9944fa25306bf5c975dd94805731e"
-          }
-        ],
-        "tieIn": null,
-        "change": null
-      },
-      {
-        "title": "AI in talent acquisition is moving from experimentation to proof",
-        "status": "STILL HOT",
-        "momentum": "steady",
-        "liveDays": 4,
-        "tags": [
-          "Recruiting",
-          "AI",
-          "Measurement",
-          "Workflow"
-        ],
-        "summary": "SHRM's State of AI in HR 2026 report puts harder numbers behind yesterday's workflow discussion: recruiting is the most common HR use case for AI at 27%, but 56% of HR teams say they do not formally measure the success of those investments. Together with SHRM Advisor's June 8 talent-acquisition piece, the pressure is shifting from trying AI to proving where it works and what recruiters should still own.",
-        "quote": null,
-        "sources": [
-          {
-            "name": "SHRM State of AI in HR 2026",
-            "url": "https://www.shrm.org/mena/topics-tools/research/state-of-ai-hr-2026/full-report"
-          },
-          {
-            "name": "SHRM Advisor",
-            "url": "https://www.shrm.org/in/topics-tools/news/blogs/ai-reshaping-talent-acquisition"
-          }
-        ],
-        "tieIn": null,
-        "change": null
-      }
-    ],
     "week": [
       {
         "title": "Recruiters tighten screening as skills and authenticity checks rise",
@@ -459,6 +396,144 @@
           {
             "name": "IAPP",
             "url": "https://iapp.org/news/a/colorado-governor-signs-amendments-to-state-ai-law/"
+          }
+        ],
+        "tieIn": null,
+        "change": null
+      }
+    ],
+    "freshToday": [
+      {
+        "title": "Compensation tradeoffs are starting to show up in AI spending decisions",
+        "status": "NEW",
+        "momentum": null,
+        "liveDays": null,
+        "tags": [
+          "Compensation",
+          "AI",
+          "Budgets",
+          "Workforce planning"
+        ],
+        "summary": "A new Business Insider report says Teradata told employees it would use its 2026 salary-adjustment budget for AI investment instead. The signal is small but important for HR leaders because it moves AI spending out of abstract strategy and into visible pay and talent tradeoffs.",
+        "quote": null,
+        "sources": [
+          {
+            "name": "Business Insider",
+            "url": "https://www.businessinsider.com/teradata-pauses-raises-employee-compensation-ai-budget-2026-6"
+          },
+          {
+            "name": "AI Driven Talent",
+            "url": "https://talentnews.substack.com/p/ai-erased-25000-jobs-last-monthmays"
+          }
+        ],
+        "tieIn": null,
+        "change": null
+      },
+      {
+        "title": "Control gaps in identity and background checks are surfacing as an HR operations issue",
+        "status": "NEW",
+        "momentum": null,
+        "liveDays": null,
+        "tags": [
+          "HR ops",
+          "Verification",
+          "Compliance",
+          "Onboarding"
+        ],
+        "summary": "A highly engaged practitioner thread today focused on a gap between identity verification and background checks for contingent workers. The story is not broad national news, but it is a fresh operational signal about where hiring controls can break even when vendors are technically in place.",
+        "quote": null,
+        "sources": [
+          {
+            "name": "r/humanresources",
+            "url": "https://www.reddit.com/r/humanresources/comments/1tn47ce/identity_verification_and_background_checks_for/"
+          }
+        ],
+        "tieIn": null,
+        "change": null
+      }
+    ],
+    "stillFresh": [
+      {
+        "title": "Labor demand holds up while hiring frictions persist",
+        "status": "STILL HOT",
+        "momentum": "steady",
+        "liveDays": 6,
+        "tags": [
+          "Hiring",
+          "Labor market",
+          "Skills gap",
+          "BLS"
+        ],
+        "summary": "The Bureau of Labor Statistics reported on June 2 that April job openings rose to 7.6 million, then reported on June 5 that May payrolls increased by 172,000 and unemployment held at 4.3%. A same-day Conference Board brief said job creation remained concentrated in a narrow set of industries, keeping attention on hiring friction rather than a broad collapse in demand.",
+        "quote": null,
+        "sources": [
+          {
+            "name": "BLS JOLTS",
+            "url": "https://www.bls.gov/news.release/archives/jolts_06022026.htm"
+          },
+          {
+            "name": "BLS Employment Situation",
+            "url": "https://www.bls.gov/news.release/archives/empsit_06052026.htm"
+          },
+          {
+            "name": "Conference Board",
+            "url": "https://www.conference-board.org/research/labor-markets-briefs/jobs-report-insights-april-2026"
+          }
+        ],
+        "tieIn": null,
+        "change": null
+      },
+      {
+        "title": "AI remains central in layoff coverage",
+        "status": "STILL HOT",
+        "momentum": "steady",
+        "liveDays": 7,
+        "tags": [
+          "AI",
+          "Layoffs",
+          "Tech",
+          "Workforce planning"
+        ],
+        "summary": "Challenger, Gray & Christmas said on June 4 that planned U.S. job cuts rose to 97,006 in May, the highest May total since 2020, and that AI was the top cited reason for a third straight month. Coverage through June 6 kept the story active, with continued debate over how much of the reduction is tied to automation versus restructuring and spending pressure.",
+        "quote": null,
+        "sources": [
+          {
+            "name": "Challenger",
+            "url": "https://www.challengergray.com/blog/challenger-report-may-job-cuts-rise-16-from-april-highest-may-total-since-2020/"
+          },
+          {
+            "name": "Axios",
+            "url": "https://www.axios.com/2026/05/06/ai-layoff-coinbase"
+          },
+          {
+            "name": "AP",
+            "url": "https://apnews.com/article/65f9944fa25306bf5c975dd94805731e"
+          }
+        ],
+        "tieIn": null,
+        "change": null
+      },
+      {
+        "title": "AI in talent acquisition is moving from experimentation to proof",
+        "status": "STILL HOT",
+        "momentum": "steady",
+        "liveDays": 4,
+        "tags": [
+          "Recruiting",
+          "AI",
+          "Measurement",
+          "Workflow"
+        ],
+        "summary": "SHRM's State of AI in HR 2026 report puts harder numbers behind yesterday's workflow discussion: recruiting is the most common HR use case for AI at 27%, but 56% of HR teams say they do not formally measure the success of those investments. Together with SHRM Advisor's June 8 talent-acquisition piece, the pressure is shifting from trying AI to proving where it works and what recruiters should still own.",
+        "quote": null,
+        "sources": [
+          {
+            "name": "SHRM State of AI in HR 2026",
+            "url": "https://www.shrm.org/mena/topics-tools/research/state-of-ai-hr-2026/full-report"
+          },
+          {
+            "name": "SHRM Advisor",
+            "url": "https://www.shrm.org/in/topics-tools/news/blogs/ai-reshaping-talent-acquisition"
           }
         ],
         "tieIn": null,
@@ -861,7 +936,7 @@
       const panelsEl = document.getElementById("panels");
       const ranges = DATA.ranges || {};
       const defs = [
-        { id: "today", label: "Today", note: "Breaking, last 24 to 48 hours." },
+        { id: "today", label: "Today", note: "Breaking, last 24 to 48 hours. New movement first, durable themes just below." },
         { id: "week", label: "Last week", note: "Trending across the past 7 days." },
         { id: "month", label: "Last month", note: "Durable themes, research, and regulation over 30 days." },
         { id: "social", label: "Social", note: "Live discussions from the last few days. Shows when each was posted and last active." },
@@ -878,6 +953,7 @@
         if (d.id === "social") count = (DATA.social || []).length;
         else if (d.id === "newsletters") count = (DATA.newsletters || []).length;
         else if (d.id === "feed") count = (DATA.feed || []).length;
+        else if (d.id === "today") count = (ranges.freshToday || []).length + (ranges.stillFresh || []).length;
         else count = (ranges[d.id] || []).length;
         tab.innerHTML = esc(d.label) + (count ? ` <span class="n">${count}</span>` : "");
 
@@ -896,6 +972,25 @@
           (DATA.feed || []).forEach((f) => wrap.appendChild(feedRow(f)));
           if (!(DATA.feed || []).length) wrap.appendChild(el("p", "range-note", "Feed is empty this run."));
           panel.appendChild(wrap);
+        } else if (d.id === "today") {
+          const fresh = ranges.freshToday || [];
+          const carry = ranges.stillFresh || [];
+          const renderTopicSection = (title, note, items, startIndex) => {
+            const wrap = el("section", "subsection");
+            const head = el("div", "subsection-head");
+            head.appendChild(el("h3", "subsection-title", esc(title)));
+            if (note) head.appendChild(el("div", "subsection-note", esc(note)));
+            wrap.appendChild(head);
+            if (items.length) {
+              items.forEach((t, i) => wrap.appendChild(topicCard(t, startIndex + i)));
+            } else {
+              wrap.appendChild(el("p", "range-note", "Nothing new cleared the bar in this lane today."));
+            }
+            return wrap;
+          };
+          panel.appendChild(renderTopicSection("Fresh today", "New or materially updated topics from the last 24 to 48 hours.", fresh, 0));
+          panel.appendChild(renderTopicSection("Still fresh", "The bigger ongoing stories still running hot.", carry, fresh.length));
+          if (!fresh.length && !carry.length) panel.appendChild(el("p", "range-note", "Nothing in this window. Try a deep run to reach further back."));
         } else {
           (ranges[d.id] || []).forEach((t, i) => panel.appendChild(topicCard(t, i)));
           if (!(ranges[d.id] || []).length) panel.appendChild(el("p", "range-note", "Nothing in this window. Try a deep run to reach further back."));
