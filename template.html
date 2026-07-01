@@ -410,7 +410,10 @@
         return n;
       };
       const esc = (s) => (s == null ? "" : String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])));
-      const linkList = (arr) => arr.map((s) => `<a href="${esc(s.url)}">${esc(s.name)}</a>`).join(", ");
+      const linkList = (arr) => arr.map((s) => {
+        const label = s.headline ? `${s.name} — ${s.headline}` : s.name;
+        return `<a href="${esc(s.url)}">${esc(label)}</a>`;
+      }).join(", ");
       const relTime = (ts, fallback) => {
         if (!ts) return fallback || "";
         const d = new Date(ts);
@@ -493,7 +496,7 @@
         if (bits.length) card.appendChild(el("div", "issue-meta", bits.join(" &middot; ")));
         if (n.summary) card.appendChild(el("p", null, esc(n.summary)));
         else card.appendChild(el("p", "range-note", "Latest issue not retrievable this run. Open it on LinkedIn for the full edition."));
-        if (n.url) card.appendChild(el("div", "sources", '<a href="' + esc(n.url) + '">' + esc(n.sourceNote || "Open newsletter") + "</a>"));
+        if (n.url) card.appendChild(el("div", "sources", '<a href="' + esc(n.url) + '">' + esc(n.issueTitle ? "Open issue" : "Open newsletter") + "</a>"));
         return card;
       }
 
