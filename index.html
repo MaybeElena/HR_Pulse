@@ -86,31 +86,6 @@
 
       .panel { margin-top: 18px; display: none; animation: fade 0.3s ease both; }
       .panel.active { display: grid; gap: 16px; }
-      .subsection {
-        display: grid;
-        gap: 14px;
-      }
-      .subsection + .subsection {
-        margin-top: 10px;
-      }
-      .subsection-head {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 12px;
-        padding: 2px 4px 0;
-      }
-      .subsection-title {
-        margin: 0;
-        font-family: var(--serif);
-        font-size: 1.35rem;
-        line-height: 1.1;
-        letter-spacing: -0.01em;
-      }
-      .subsection-note {
-        color: var(--soft);
-        font-size: 0.86rem;
-      }
       @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
       .range-note { color: var(--soft); font-size: 0.9rem; margin: 2px 2px 0; }
 
@@ -149,7 +124,6 @@
       .platforms { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 10px; }
       .platforms .pill { background: rgba(92, 135, 255, 0.14); color: #cdddff; }
       .live-meta { color: var(--muted); font-size: 0.84rem; margin: 0 0 12px; font-variant-numeric: tabular-nums; }
-      .social-quote { margin: 14px 0; }
       .sentiment { color: var(--muted); font-size: 0.9rem; margin: 8px 0 0; }
       .sentiment strong { color: var(--text); }
 
@@ -215,8 +189,7 @@
         social  : 4 to 6 live discussions. A discussion qualifies if posted within
                   72h OR last comment within 24h. Show posted, lastActivity, and
                   liveness ("active" | "slowing" | "quiet"). Describe what is
-                  happening in concrete terms and include a short quote from the
-                  hottest linked post when it adds signal.
+                  happening; do not tell the reader how to use it.
         newsletters : the watchlist's latest issues. Mark NEW only when a new
                   issue appeared since last run (from nl-update). Summarize in
                   your own words, skip vendor product pitches, link-only if the
@@ -238,25 +211,165 @@
   "date": "July 6, 2026",
   "edition": "Daily edition",
   "ranges": {
-    "week": [
+    "freshToday": [
       {
-        "title": "Recruiters tighten screening as skills and authenticity checks rise",
-        "status": "STILL HOT",
-        "momentum": "steady",
-        "liveDays": 35,
+        "title": "WSJ says big tech has suddenly flipped on the AI jobs wipeout scenario",
+        "status": "NEW",
+        "momentum": null,
+        "liveDays": null,
         "tags": [
-          "Recruiting",
-          "Skills-based hiring",
-          "Verification",
-          "HR ops"
+          "AI",
+          "Jobs",
+          "Big Tech",
+          "Labor market"
         ],
-        "summary": "SHRM and HR Dive both pointed this week to a recruiting environment where resumes, interviews, and application volume are harder to trust at face value. Employers are leaning harder on skills-based assessment, stronger screening steps, and process changes meant to catch low-quality or fraudulent applications earlier.",
+        "summary": "The new line from top AI and tech leaders is less about imminent job collapse and more about productivity, new tasks, and slower, uneven displacement. That does not erase cuts, but it does change the frame HR leaders are reacting to.",
         "quote": null,
         "sources": [
           {
-            "name": "SHRM",
-            "url": "https://www.shrm.org/events-education/education/webinars/the-recruiting-trends-shaping-2026-ai-skillfishing-and-software-insights"
+            "name": "WSJ",
+            "url": "https://www.wsj.com/tech/ai/ai-workers-tech-ceos-job-losses-afc71e15"
           },
+          {
+            "name": "Axios",
+            "url": "https://www.axios.com/2026/06/18/microsoft-president-ai-jobs-labor-market"
+          }
+        ],
+        "tieIn": null,
+        "change": null
+      },
+      {
+        "title": "Goldman says AI could displace 15 million U.S. workers, but the timeline and scale are still contested",
+        "status": "NEW",
+        "momentum": null,
+        "liveDays": null,
+        "tags": [
+          "AI",
+          "Labor market",
+          "Forecasts",
+          "White-collar work"
+        ],
+        "summary": "Joseph Briggs is putting a large long-run number on U.S. displacement risk, while Neil Thompson argues adoption frictions still make partial automation more likely than clean job removal in many roles. The argument has shifted from whether AI matters to how fast it will really change work.",
+        "quote": null,
+        "sources": [
+          {
+            "name": "Business Insider — Goldman Sachs economist predicts AI displacing 15 million jobs",
+            "url": "https://www.businessinsider.com/goldman-sachs-economist-predicts-ai-displacing-15-million-jobs-2026-7"
+          }
+        ],
+        "tieIn": null,
+        "change": null
+      },
+      {
+        "title": "WSJ says the 2026 job market is holding up better than expected even after a weak June report",
+        "status": "NEW",
+        "momentum": null,
+        "liveDays": null,
+        "tags": [
+          "Hiring",
+          "Jobs report",
+          "Labor market",
+          "Economy"
+        ],
+        "summary": "June hiring looked softer, but the Journal says the market is broader-based and steadier than the headline gloom suggests. For HR teams, the message is slowdown and friction, not a broad hiring collapse.",
+        "quote": null,
+        "sources": [
+          {
+            "name": "WSJ",
+            "url": "https://www.wsj.com/economy/jobs/this-years-job-market-is-shaping-up-to-be-surprisingly-stable-e337c98b"
+          },
+          {
+            "name": "Axios",
+            "url": "https://www.axios.com/2026/07/03/june-jobs-report-economy-labor-market"
+          }
+        ],
+        "tieIn": null,
+        "change": null
+      }
+    ],
+    "stillFresh": [
+      {
+        "title": "Business Insider says new AI hiring data complicates the usual layoff narrative",
+        "status": "STILL HOT",
+        "momentum": "steady",
+        "liveDays": 5,
+        "tags": [
+          "AI",
+          "Hiring",
+          "Layoffs",
+          "Entry-level jobs"
+        ],
+        "summary": "Ramp and Revelio Labs say AI-heavy firms were more likely to grow headcount and entry-level hiring, even while automation fears keep dominating the conversation. The data makes the labor story look more uneven than the public layoff narrative suggests.",
+        "quote": null,
+        "sources": [
+          {
+            "name": "Business Insider",
+            "url": "https://www.businessinsider.com/the-ai-layoffs-story-just-got-more-complicated-2026-6"
+          }
+        ],
+        "tieIn": null,
+        "change": null
+      },
+      {
+        "title": "Axios says tech firms are now funding AI workforce-transition programs instead of just warning about disruption",
+        "status": "STILL HOT",
+        "momentum": "steady",
+        "liveDays": 11,
+        "tags": [
+          "AI",
+          "Reskilling",
+          "Workforce strategy",
+          "Policy"
+        ],
+        "summary": "Raise Us moves the AI labor conversation from forecasting into transition support: wage insurance, retraining, coaching, and credentials. That puts more pressure on employers to show what support looks like in practice.",
+        "quote": null,
+        "sources": [
+          {
+            "name": "Axios",
+            "url": "https://www.axios.com/2026/06/25/anthropic-labor-market-ai-jobs-crisis"
+          }
+        ],
+        "tieIn": null,
+        "change": null
+      },
+      {
+        "title": "Business Insider's 2026 layoff tracker says AI-linked cuts now span nearly 40 companies",
+        "status": "STILL HOT",
+        "momentum": "steady",
+        "liveDays": 7,
+        "tags": [
+          "Layoffs",
+          "AI",
+          "Tracking",
+          "Workforce planning"
+        ],
+        "summary": "The running tracker keeps showing how often companies pair AI-efficiency language with cuts to administrative and white-collar roles while moving resources into technical and automation work.",
+        "quote": null,
+        "sources": [
+          {
+            "name": "Business Insider",
+            "url": "https://www.businessinsider.com/recent-company-layoffs-laying-off-workers-2026"
+          }
+        ],
+        "tieIn": null,
+        "change": null
+      }
+    ],
+    "week": [
+      {
+        "title": "HR Dive says fraudulent and deepfake candidates are forcing tighter hiring controls",
+        "status": "STILL HOT",
+        "momentum": "rising",
+        "liveDays": 6,
+        "tags": [
+          "Candidate fraud",
+          "Screening",
+          "Hiring controls",
+          "Risk"
+        ],
+        "summary": "Identity checks, remote interview controls, and stronger screening are moving from edge cases into standard HR operations as fake candidates become more visible.",
+        "quote": null,
+        "sources": [
           {
             "name": "HR Dive",
             "url": "https://www.hrdive.com/news/youve-hired-a-fraudulent-employee-what-comes-next/819365/"
@@ -266,43 +379,39 @@
         "change": null
       },
       {
-        "title": "Manager engagement and leadership strain are climbing back into view",
+        "title": "Gallup says manager engagement drove much of the latest workplace decline",
         "status": "STILL HOT",
         "momentum": "steady",
-        "liveDays": 31,
+        "liveDays": 7,
         "tags": [
           "Managers",
           "Engagement",
           "Leadership",
-          "Retention"
+          "Burnout"
         ],
-        "summary": "Gallup's 2026 State of the Global Workplace report said global employee engagement fell to 20% in 2025 and that the sharpest decline came from managers, whose engagement dropped from 27% in 2024 to 22% in 2025. The signal fits a broader executive concern: leaders are carrying more change and adoption work at the same time that team energy is softening.",
+        "summary": "The sharpest engagement drop came from managers, keeping leadership strain, workload design, and middle-manager support high on the HR executive agenda.",
         "quote": null,
         "sources": [
           {
-            "name": "Gallup report",
+            "name": "Gallup",
             "url": "https://www.gallup.com/workplace/697904/state-of-the-global-workplace-global-data.aspx"
-          },
-          {
-            "name": "Gallup manager view",
-            "url": "https://www.gallup.com/workplace/349484/remote-work-employee-engagement.aspx"
           }
         ],
         "tieIn": null,
         "change": null
       },
       {
-        "title": "Pay transparency is expanding from legal deadline to operating model",
+        "title": "Pay transparency is shifting from deadline coverage into operating model work",
         "status": "STILL HOT",
         "momentum": "steady",
-        "liveDays": 31,
+        "liveDays": 9,
         "tags": [
-          "Compensation",
-          "Benefits",
+          "Pay transparency",
+          "Rewards",
           "Compliance",
-          "HRBPs"
+          "Operations"
         ],
-        "summary": "The June 7 deadline has shifted pay transparency from countdown coverage into implementation work. The focus is now on salary-range disclosure, pay-history rules, pay-gap reporting, manager guidance, and how rewards, recruiting, and employee communications line up in practice.",
+        "summary": "The focus has moved beyond the directive itself to salary-range disclosure, reporting, manager guidance, and how recruiting and rewards systems actually line up.",
         "quote": null,
         "sources": [
           {
@@ -320,73 +429,17 @@
     ],
     "month": [
       {
-        "title": "Candidate fraud and deepfakes stay on the hiring risk agenda",
+        "title": "Colorado's rewritten AI law points employers toward notices and recordkeeping",
         "status": "STILL HOT",
         "momentum": "steady",
-        "liveDays": 59,
+        "liveDays": 24,
         "tags": [
-          "Candidate fraud",
-          "Deepfakes",
-          "Security",
-          "Hiring risk"
-        ],
-        "summary": "May and early June coverage kept returning to fraudulent candidates, identity risks, and remote interview abuse. The issue has moved beyond one-off anecdotes and is showing up as a repeat hiring-control problem for employers with remote or technical openings.",
-        "quote": null,
-        "sources": [
-          {
-            "name": "HR Dive",
-            "url": "https://www.hrdive.com/news/youve-hired-a-fraudulent-employee-what-comes-next/819365/"
-          },
-          {
-            "name": "r/sysadmin",
-            "url": "https://www.reddit.com/r/sysadmin/comments/1txtibv/getting_ai_generated_applications_as_a_hiring/"
-          },
-          {
-            "name": "r/recruiting",
-            "url": "https://www.reddit.com/r/recruiting/comments/1snh8g3/i_screened_400_applications_last_week_and_maybe/"
-          }
-        ],
-        "tieIn": null,
-        "change": null
-      },
-      {
-        "title": "Manager engagement is now a measurable workforce risk",
-        "status": "STILL HOT",
-        "momentum": "steady",
-        "liveDays": 59,
-        "tags": [
-          "Managers",
-          "Wellbeing",
-          "Productivity",
-          "Culture"
-        ],
-        "summary": "Gallup's 2026 workplace report gave executives a sharper metric for leadership strain by showing a marked drop in manager engagement. That puts manager support, training, and workload design back into the monthly CHRO agenda alongside hiring and productivity concerns.",
-        "quote": null,
-        "sources": [
-          {
-            "name": "Gallup report",
-            "url": "https://www.gallup.com/workplace/697904/state-of-the-global-workplace-global-data.aspx"
-          },
-          {
-            "name": "Gallup strategies",
-            "url": "https://www.gallup.com/workplace/703361/employee-engagement-strategies-2026.aspx"
-          }
-        ],
-        "tieIn": null,
-        "change": null
-      },
-      {
-        "title": "Colorado's rewritten AI law gives employers more time but not less prep work",
-        "status": "STILL HOT",
-        "momentum": "steady",
-        "liveDays": 29,
-        "tags": [
-          "AI regulation",
+          "Regulation",
+          "AI law",
           "Compliance",
-          "Hiring",
-          "Colorado"
+          "Employment tech"
         ],
-        "summary": "Colorado's new SB 26-189 replaces the broader earlier model with a notice-and-recordkeeping framework for high-risk AI use, including employment decisions. The employment provisions now start on January 1, 2027, but the practical direction for HR is clearer: document the tool, explain the use, and be ready to respond when decisions are challenged.",
+        "summary": "The revised law gives employers more time, but it makes the practical direction clearer: document the tool, explain the use, and tighten governance around employment-related AI.",
         "quote": null,
         "sources": [
           {
@@ -395,136 +448,51 @@
           },
           {
             "name": "IAPP",
-            "url": "https://iapp.org/news/a/colorado-governor-signs-amendments-to-state-ai-law/"
-          }
-        ],
-        "tieIn": null,
-        "change": null
-      }
-    ],
-    "freshToday": [
-      {
-        "title": "WSJ says big tech has suddenly flipped on the AI jobs wipeout scenario",
-        "status": "NEW",
-        "momentum": "rising",
-        "liveDays": 1,
-        "tags": [
-          "AI",
-          "Tech leaders",
-          "Jobs",
-          "Workforce strategy"
-        ],
-        "summary": "The Wall Street Journal says top tech executives are striking a much more optimistic tone on AI and jobs than they were a year ago. Sam Altman and Dario Amodei are now emphasizing productivity gains and new work creation more than immediate mass job loss, even as layoffs continue at companies such as Meta and Amazon and many firms are still struggling to turn AI investment into clear returns.",
-        "quote": null,
-        "sources": [
-          {
-            "name": "WSJ",
-            "url": "https://www.wsj.com/tech/ai/ai-workers-tech-ceos-job-losses-afc71e15",
-            "headline": "Big Tech Has Suddenly Flipped on the AI Jobs Wipeout Scenario"
-          },
-          {
-            "name": "Axios",
-            "url": "https://www.axios.com/2026/06/30/ai-job-loss-anthropic-dario",
-            "headline": "AI evangelists chill out on worker-bloodbath rhetoric"
+            "url": "https://iapp.org/news/a/colorado-revises-ai-act-what-it-means-for-employment-uses/"
           }
         ],
         "tieIn": null,
         "change": null
       },
       {
-        "title": "Goldman says AI could displace 15 million U.S. workers, but the timeline and scale are still contested",
-        "status": "NEW",
-        "momentum": "rising",
-        "liveDays": 1,
-        "tags": [
-          "AI",
-          "Displacement",
-          "Economists",
-          "White-collar work"
-        ],
-        "summary": "Business Insider says Goldman Sachs economist Joseph Briggs now estimates AI could displace 15 million U.S. workers, about 9% of the workforce, while still arguing that technology-driven job creation can absorb much of the shock over time. The same discussion also includes skepticism from MIT's Neil Thompson, who says cost, data access, and adoption limits mean most jobs are more likely to be partially automated than fully eliminated soon.",
-        "quote": null,
-        "sources": [
-          {
-            "name": "Business Insider",
-            "url": "https://www.businessinsider.com/goldman-sachs-economist-predicts-ai-displacing-15-million-jobs-2026-7",
-            "headline": "A top Goldman Sachs economist says AI will displace the jobs of 15 million US workers"
-          }
-        ],
-        "tieIn": null,
-        "change": null
-      }
-    ],
-    "stillFresh": [
-      {
-        "title": "WSJ says the 2026 job market is holding up better than expected even after a weak June report",
+        "title": "Candidate fraud remains a durable hiring-control problem",
         "status": "STILL HOT",
         "momentum": "steady",
-        "liveDays": 4,
+        "liveDays": 28,
         "tags": [
-          "Labor market",
-          "Hiring",
-          "Economy",
-          "Workforce planning"
+          "Candidate fraud",
+          "Remote hiring",
+          "Identity",
+          "Controls"
         ],
-        "summary": "The Wall Street Journal says this year's job market is shaping up to be surprisingly stable even after June payroll growth came in at just 57,000. Hiring is still cooling and labor-force participation fell sharply, but a broader set of industries is hiring than a year ago, which matters for HR leaders trying to judge whether the labor market is actually breaking or just slowing unevenly.",
+        "summary": "Coverage keeps returning to stand-ins, identity risks, and remote interview abuse, especially in technical roles. That keeps fraud prevention in the monthly risk layer, not just the weekly news layer.",
         "quote": null,
         "sources": [
           {
-            "name": "WSJ",
-            "url": "https://www.wsj.com/economy/jobs/this-years-job-market-is-shaping-up-to-be-surprisingly-stable-e337c98b",
-            "headline": "This Year's Job Market Is Shaping Up to Be Surprisingly Stable"
-          },
-          {
-            "name": "Axios",
-            "url": "https://www.axios.com/2026/07/02/jobs-report-labor-market-june",
-            "headline": "Jobs report gives labor market a yellow card"
+            "name": "HR Dive",
+            "url": "https://www.hrdive.com/news/youve-hired-a-fraudulent-employee-what-comes-next/819365/"
           }
         ],
         "tieIn": null,
         "change": null
       },
       {
-        "title": "A new AI hiring study says the layoff story is more complicated than the headlines suggest",
+        "title": "Manager strain is staying on the executive agenda",
         "status": "STILL HOT",
         "momentum": "steady",
-        "liveDays": 6,
+        "liveDays": 26,
         "tags": [
-          "AI",
-          "Hiring",
-          "Layoffs",
-          "Entry-level"
+          "Managers",
+          "Leadership",
+          "Engagement",
+          "Operating model"
         ],
-        "summary": "Business Insider says new Ramp and Revelio Labs data on 22,000 U.S. firms cuts against the broad claim that AI adoption automatically means workforce shrinkage. The study says companies investing heavily in AI were more likely to grow headcount and even raise entry-level hiring, especially in information-sector businesses, while still failing to show a clean productivity payoff.",
+        "summary": "The manager-engagement drop is not reading as a one-cycle data point. It keeps tying into bigger conversations about spans of control, change fatigue, and what people leaders are being asked to absorb.",
         "quote": null,
         "sources": [
           {
-            "name": "Business Insider",
-            "url": "https://www.businessinsider.com/the-ai-layoffs-story-just-got-more-complicated-2026-6",
-            "headline": "Is AI causing layoffs? This report says it's complicated."
-          }
-        ],
-        "tieIn": null,
-        "change": null
-      },
-      {
-        "title": "Business Insider's 2026 layoff tracker says AI-linked cuts now span nearly 40 companies this year",
-        "status": "STILL HOT",
-        "momentum": "steady",
-        "liveDays": 6,
-        "tags": [
-          "Layoffs",
-          "AI",
-          "Corporate restructuring",
-          "Labor market"
-        ],
-        "summary": "Business Insider's updated 2026 layoff tracker says workforce cuts tied to AI, efficiency pushes, and restructurings now stretch across nearly 40 companies, including Meta, Amazon, Oracle, Coinbase, and Groupon. The value of the piece for HR is less the list itself than the pattern: AI is still being used as a public-facing reason for reducing administrative and white-collar roles while companies redirect resources into automation and technical capacity.",
-        "quote": null,
-        "sources": [
-          {
-            "name": "Business Insider",
-            "url": "https://www.businessinsider.com/recent-company-layoffs-laying-off-workers-2026",
-            "headline": "Companies laying off staff this year include Meta, Amazon, and Groupon - see the list"
+            "name": "Gallup",
+            "url": "https://www.gallup.com/workplace/697904/state-of-the-global-workplace-global-data.aspx"
           }
         ],
         "tieIn": null,
@@ -534,44 +502,37 @@
   },
   "social": [
     {
-      "title": "Remote workers are still reacting to always-on pressure and burnout",
+      "title": "Remote-work burnout and always-on pressure are still resonating in public discussion",
       "platforms": [
-        "Reddit (proxy)"
+        "Social proxy",
+        "Economic Times"
       ],
-      "posted": "11d ago",
-      "lastActivity": "11d ago",
+      "posted": "2d ago",
+      "lastActivity": "today",
       "liveness": "active",
-      "summary": "Economic Times says a Reddit discussion on remote-work burnout is still resonating because workers feel pressure to stay constantly available, answer instantly, and prove they are productive all day. The advice that spread most widely was practical rather than dramatic: take breaks, stop treating every interruption as urgent, and rebuild boundaries before burnout becomes routine.",
-      "quote": {
-        "text": "Your company won't collapse if you go to bathroom.",
-        "attribution": "Reddit post cited by Economic Times"
-      },
-      "sentiment": "Tired, practical, boundary-setting",
+      "summary": "One widely shared discussion frames remote-work burnout around the feeling that workers can never really go offline, even when flexibility is supposed to help. The strong reaction is less about perks and more about control, boundaries, and recovery time.",
+      "sentiment": "Burned out, skeptical of always-on expectations",
       "threads": [
         {
-          "name": "WFH employee shares how he beats remote work burnout",
+          "name": "Your company will not collapse if you go to the bathroom: remote-work burnout discussion",
           "url": "https://m.economictimes.com/magazines/panache/your-company-wont-collapse-if-you-got-to-bathroom-wfh-employee-shares-how-he-beats-remote-work-burnout/articleshow/131908469.cms"
         }
       ]
     },
     {
-      "title": "Workers are still sharing posts that call out normalized burnout and humiliation",
+      "title": "Pushback against normalized burnout, humiliation, and no-boundary management",
       "platforms": [
-        "Instagram",
-        "Social reaction"
+        "Social proxy",
+        "Economic Times"
       ],
-      "posted": "11d ago",
-      "lastActivity": "11d ago",
+      "posted": "1d ago",
+      "lastActivity": "today",
       "liveness": "active",
-      "summary": "Economic Times says a viral Instagram post from career coach Vijay Chandola is still getting broad reaction because it names three workplace patterns employees no longer want treated as normal: glorifying burnout, tolerating public humiliation, and expecting availability beyond work hours.",
-      "quote": {
-        "text": "They are the problem, not you.",
-        "attribution": "Vijay Chandola post via Economic Times"
-      },
-      "sentiment": "Fed up, validating, anti-burnout",
+      "summary": "A second widely shared workplace discussion is landing because it describes toxic habits many people recognize immediately: public humiliation, boundaryless availability, and burnout as a badge of seriousness.",
+      "sentiment": "Fed up, validating, boundary-seeking",
       "threads": [
         {
-          "name": "Viral post lists 3 toxic workplace habits that have been normalised for too long",
+          "name": "Viral post on burnout, humiliation, and no boundaries at work",
           "url": "https://m.economictimes.com/news/new-updates/burnout-humiliation-and-no-boundaries-viral-post-lists-3-toxic-workplace-habits-that-have-been-normalised-for-too-long/articleshow/131925591.cms"
         }
       ]
@@ -579,69 +540,69 @@
   ],
   "newsletters": [
     {
-      "name": "AI Driven Talent",
-      "cadence": "Weekly",
-      "status": "",
-      "issueTitle": "AI Erased 25,000 Jobs Last Month—May's 172K Blowout Hid It",
-      "issueDate": "June 9",
-      "summary": "May's 172,000 payroll gain masked a quieter AI substitution story: Goldman Sachs' tracker still shows 25,000 knowledge-worker jobs disappearing each month. The issue also points to Salesforce's 15,000-person engineering hiring freeze, BCG's finding that 66% of AI productivity efforts are being wasted, and a Goldman tracker showing younger workers carrying more of the job-loss risk.",
-      "url": "https://talentnews.substack.com/p/ai-erased-25000-jobs-last-monthmays",
-      "sourceNote": "Stored issue; not reverified this run"
-    },
-    {
-      "name": "HR Leaders Podcast",
-      "cadence": "Weekly",
-      "status": "",
-      "issueTitle": "The AI Shift Every HR Leader Needs to Prepare for in 2026",
-      "issueDate": "June 4",
-      "summary": "HR teams need three things in place before AI scales well: literacy for leaders and employees, a few visible use cases that prove business value, and operating-model changes that remove low-value work without losing trust or empathy.",
-      "url": "https://hrleaders.co/podcast/the-ai-shift-every-hr-leader-needs-to-prepare-for-in-2026",
-      "sourceNote": "Stored issue; not reverified this run"
-    },
-    {
-      "name": "This Week in Recruiting",
+      "name": "Recruiting Brainfood / Open Kitchen",
       "cadence": "Weekly",
       "status": "NEW",
-      "issueTitle": "This Week in Recruiting - Issue 274",
-      "issueDate": "June 29",
-      "summary": "Recruiters are still most valuable where judgment, calibration, and context matter most, while the issue also keeps attention on AI agents in recruiting, changing candidate behavior, and how teams should separate signal from noise in a looser hiring market.",
-      "url": "https://www.linkedin.com/pulse/week-recruiting-issue-274-hung-lee-dqhfe/",
-      "sourceNote": "User-supplied latest issue URL"
-    },
-    {
-      "name": "The Eightfold Take",
-      "cadence": "Varies",
-      "status": "",
-      "issueTitle": "Your HR system knows everything about the past — and nothing about the future",
-      "issueDate": "June 1",
-      "summary": "Resume keywords miss viable talent, future skill gaps need to be mapped before shortages hit, and career paths should be personalized around business needs rather than static role history. Product material is left out here.",
-      "url": "https://eightfold.ai/blog/hr-system-talent-intelligence-future-workforce/",
-      "sourceNote": "Stored issue; not reverified this run"
+      "issueTitle": "Recruiting Brainfood - Issue 508",
+      "issueDate": "2026-07-05",
+      "summary": "Issue 508 spans entry-level work, the 2026 remote labor index, AI chief-of-staff roles, blue-collar telework, LinkedIn identity verification, AI productivity evidence, and the export of jobs when H-1B constraints rise.",
+      "url": "https://recruitingbrainfood.substack.com/",
+      "linkedinUrl": "https://www.linkedin.com/newsletters/this-week-in-recruiting-6779688850651414530/",
+      "sourceNote": "Substack RSS feed",
+      "freshnessFlag": null
     },
     {
       "name": "Data-Driven HR Monthly",
       "cadence": "Monthly",
       "status": "",
-      "issueTitle": "The best HR & People Analytics articles of May 2026",
-      "issueDate": "May 31",
-      "summary": "The WEF's latest Chief People Officers' Outlook, a projected shift that cuts routine HR work from 60% to 20% of capacity, evidence linking stronger employee experience to better market performance, and a case for treating meetings as a system-design problem lead this issue.",
-      "url": "https://www.linkedin.com/pulse/best-hr-people-analytics-articles-may-2026-david-green--uw2oe",
-      "sourceNote": "Stored issue; not reverified this run"
+      "issueTitle": "The best HR & People Analytics articles of June 2026",
+      "issueDate": "2026-06-28",
+      "summary": "The June 28 issue says the center of gravity is shifting from AI experimentation to measurable business value. It highlights Merck on starting with business problems, McKinsey on capability-based workforce planning, BCG on work redesign over tool adoption, and the Work AI Index on productivity gains that still need organizational follow-through.",
+      "url": "https://www.linkedin.com/newsletters/data-driven-hr-monthly-6793421002836590592",
+      "linkedinUrl": null,
+      "sourceNote": "Manual verification of explicit date on LinkedIn newsletter page",
+      "freshnessFlag": null
     },
     {
-      "name": "SmartHorizons",
-      "cadence": "Monthly",
+      "name": "The Eightfold Take",
+      "cadence": "Biweekly",
       "status": "",
-      "issueTitle": null,
+      "issueTitle": "Latest issue on LinkedIn",
       "issueDate": null,
       "summary": null,
-      "url": "https://www.linkedin.com/newsletters/smarthorizons-7159262810659577858",
-      "sourceNote": "No current public issue retrieved this run"
+      "url": "https://www.linkedin.com/newsletters/the-eightfold-take-7260354048741011458",
+      "linkedinUrl": null,
+      "sourceNote": "Public LinkedIn view is incomplete; latest issue should be checked by click-through",
+      "freshnessFlag": "newer issue likely exists — check by click"
+    },
+    {
+      "name": "HR Leaders Podcast",
+      "cadence": "Weekly",
+      "status": "",
+      "issueTitle": "Latest episode on HR Leaders",
+      "issueDate": null,
+      "summary": null,
+      "url": "https://www.linkedin.com/newsletters/hr-leaders-podcast-6874375003840765952",
+      "linkedinUrl": null,
+      "sourceNote": "Current latest episode not reverified in this run; use click-through",
+      "freshnessFlag": "newer issue likely exists — check by click"
+    },
+    {
+      "name": "AI Driven Talent",
+      "cadence": "Weekly",
+      "status": "NEW",
+      "issueTitle": "55% of Bosses Regret Their AI Layoffs — Now They're Quietly Rehiring",
+      "issueDate": "2026-07-06",
+      "summary": "The latest issue says 55% of employers who cut roles for AI now regret it, June hiring slowed to 57,000 jobs, Microsoft is preparing roughly 5,500 more cuts, and heavy AI spenders still grew headcount 10% with entry-level hiring up 12%.",
+      "url": "https://talentnews.substack.com/p/55-of-bosses-regret-their-ai-layoffs",
+      "linkedinUrl": null,
+      "sourceNote": "Substack RSS feed",
+      "freshnessFlag": null
     }
   ],
   "feed": [
     {
-      "time": "Jul 6",
+      "key": "tech-leaders-flip-on-ai-jobs-message",
       "headline": "WSJ says big tech leaders have flipped to a more optimistic AI jobs message",
       "blurb": "Top AI leaders are now talking more about productivity and new work creation than immediate job wipeout, even as layoffs and spending pressure continue.",
       "source": "WSJ",
@@ -649,19 +610,23 @@
       "url": "https://www.wsj.com/tech/ai/ai-workers-tech-ceos-job-losses-afc71e15",
       "also": [
         "Axios"
-      ]
+      ],
+      "ts": "2026-07-06T13:01:35+00:00",
+      "last_seen": "2026-07-06"
     },
     {
-      "time": "Jul 3",
+      "key": "goldman-15-million-us-workers-displacement",
       "headline": "Business Insider says Goldman now sees AI displacing 15 million U.S. workers over time",
       "blurb": "Joseph Briggs puts a concrete number on displacement risk, while Neil Thompson argues that adoption frictions still make partial automation more likely than full job removal in many roles.",
       "source": "Business Insider",
       "tier": "trade",
       "url": "https://www.businessinsider.com/goldman-sachs-economist-predicts-ai-displacing-15-million-jobs-2026-7",
-      "also": []
+      "also": [],
+      "ts": "2026-07-06T13:01:35+00:00",
+      "last_seen": "2026-07-06"
     },
     {
-      "time": "Jul 3",
+      "key": "job-market-surprisingly-stable-wsj-july",
       "headline": "WSJ says the job market is holding up better than expected even after a weak June report",
       "blurb": "June payroll growth slowed sharply, but the Journal says hiring is broader-based than a year ago, making the labor market look softer rather than broken.",
       "source": "WSJ",
@@ -669,251 +634,111 @@
       "url": "https://www.wsj.com/economy/jobs/this-years-job-market-is-shaping-up-to-be-surprisingly-stable-e337c98b",
       "also": [
         "Axios"
-      ]
+      ],
+      "ts": "2026-07-06T13:01:35+00:00",
+      "last_seen": "2026-07-06"
     },
     {
-      "time": "Jul 1",
+      "key": "ai-hiring-study-complicates-layoff-story",
       "headline": "Business Insider says new AI hiring data complicates the usual layoff narrative",
       "blurb": "Ramp and Revelio Labs say AI-heavy firms were more likely to grow headcount and entry-level hiring, even though the productivity case is still mixed.",
       "source": "Business Insider",
       "tier": "trade",
       "url": "https://www.businessinsider.com/the-ai-layoffs-story-just-got-more-complicated-2026-6",
-      "also": []
+      "also": [],
+      "ts": "2026-07-06T13:01:35+00:00",
+      "last_seen": "2026-07-06"
     },
     {
-      "time": "Jun 30",
-      "headline": "Business Insider's 2026 layoff tracker says AI-linked cuts now span nearly 40 companies",
-      "blurb": "The updated tracker shows how often companies are pairing AI-efficiency language with cuts to administrative and white-collar roles while shifting resources into automation and technical capacity.",
-      "source": "Business Insider",
-      "tier": "trade",
-      "url": "https://www.businessinsider.com/recent-company-layoffs-laying-off-workers-2026",
-      "also": []
-    },
-    {
-      "time": "Jun 29",
-      "headline": "WSJ's economist panel says AI now looks more like a split labor market than one job apocalypse",
-      "blurb": "David Autor, Anton Korinek, and Martha Gimbel disagree on the scale of disruption, but all three point to uneven effects across occupations, ages, and white-collar roles.",
-      "source": "WSJ",
-      "tier": "trade",
-      "url": "https://www.wsj.com/economy/jobs/ai-jobs-economists-f787105d",
-      "also": []
-    },
-    {
-      "time": "Jun 25",
+      "key": "raise-us-worker-transition-fund",
       "headline": "Axios says tech firms are now funding AI workforce-transition programs instead of just warning about disruption",
       "blurb": "Raise Us starts with wage-insurance, retraining, coaching, and credential experiments in four states, backed by major AI and tech companies.",
       "source": "Axios",
       "tier": "trade",
       "url": "https://www.axios.com/2026/06/25/anthropic-labor-market-ai-jobs-crisis",
-      "also": []
+      "also": [],
+      "ts": "2026-07-06T13:01:35+00:00",
+      "last_seen": "2026-07-06"
     },
     {
-      "time": "Jun 25",
-      "headline": "MarketWatch says worker anxiety about layoffs is still running high despite low unemployment",
-      "blurb": "Glassdoor data cited in the piece says AI has overtaken inflation and burnout as the top workplace worry, while slow hiring is making job insecurity feel more acute.",
-      "source": "MarketWatch",
-      "tier": "trade",
-      "url": "https://www.marketwatch.com/story/americans-are-as-worried-as-ever-about-layoffs-and-losing-their-jobs-why-so-much-angst-6503fb63",
-      "also": []
-    },
-    {
-      "time": "Jun 24",
-      "headline": "AWS CEO Matt Garman says AI may change half of white-collar jobs without causing a wipe-out",
-      "blurb": "Garman says AI will reshape work rather than eliminate it outright and points to Amazon's large intern and junior-engineer intake as evidence that early-career talent still matters.",
+      "key": "layoff-tracker",
+      "headline": "Business Insider's 2026 layoff tracker says AI-linked cuts now span nearly 40 companies",
+      "blurb": "The updated tracker shows how often companies are pairing AI-efficiency language with cuts to administrative and white-collar roles while shifting resources into automation and technical capacity.",
       "source": "Business Insider",
       "tier": "trade",
-      "url": "https://www.businessinsider.com/amazon-aws-ceo-matt-garman-white-collar-jobs-change-ai-2026-6",
-      "also": []
+      "url": "https://www.businessinsider.com/recent-company-layoffs-laying-off-workers-2026",
+      "also": [],
+      "ts": "2026-07-06T13:01:35+00:00",
+      "last_seen": "2026-07-06"
     },
     {
-      "time": "Jun 22",
-      "headline": "FT says AI is already shrinking demand for some white-collar hiring",
-      "blurb": "Simon Johnson says the near-term effect is weaker hiring for mid-level white-collar work before any single dramatic layoff wave appears.",
-      "source": "Financial Times",
-      "tier": "trade",
-      "url": "https://www.ft.com/content/233b76cf-2e30-48bd-96fc-b996ad5e307a",
-      "also": []
-    },
-    {
-      "time": "Jun 22",
-      "headline": "Axios says benefit cuts are increasingly being linked to AI investment and rising costs",
-      "blurb": "The report says employers are pulling back on benefits, bonuses, and raises as healthcare spending climbs and more budget gets redirected toward AI.",
-      "source": "Axios San Diego",
-      "tier": "trade",
-      "url": "https://www.axios.com/local/san-diego/2026/06/19/workplace-benefits-cuts-ai-health-costs",
-      "also": []
-    },
-    {
-      "time": "Jun 19",
-      "headline": "The Guardian argues AI may spread gig-style work conditions more widely across the labor market",
-      "blurb": "The piece says AI may turn more full-time roles into fragmented contractor-style work, using Klarna's rehiring pattern as the clearest example.",
-      "source": "The Guardian",
-      "tier": "trade",
-      "url": "https://www.theguardian.com/technology/2026/jun/18/ai-threatens-gig-work-rise",
-      "also": []
-    },
-    {
-      "time": "Jun 19",
-      "headline": "Axios says AI job replacement is becoming part of a broader labor-politics argument",
-      "blurb": "An Axios Closer item highlights Josh Hawley's criticism of AI-driven job replacement, pushing the issue from executive messaging into live labor-policy positioning.",
-      "source": "Axios Closer",
-      "tier": "trade",
-      "url": "https://www.axios.com/newsletters/axios-closer-40893edd-a5ec-4b60-bf6c-c2db7c524c67",
-      "also": []
-    },
-    {
-      "time": "Jun 18",
-      "headline": "Jeff Bezos said AI could tighten labor supply rather than trigger mass unemployment",
-      "blurb": "At VivaTech in Paris, Bezos argued that easier product creation could expand demand for builders and technical talent faster than many current job-loss forecasts assume.",
-      "source": "Business Insider",
-      "tier": "trade",
-      "url": "https://www.businessinsider.com/jeff-bezos-ai-will-create-labor-shortage-not-mass-unemployment-2026-6",
-      "also": []
-    },
-    {
-      "time": "Jun 11",
-      "headline": "HR Dive says ghost-job postings are moving closer to fines and formal scrutiny",
-      "blurb": "A new HR Dive numbers roundup highlights possible penalties for ghost-job postings, pushing the issue from candidate frustration into compliance and employer-brand risk.",
+      "key": "candidate-fraud-tightens-screening",
+      "headline": "HR Dive says fraudulent and deepfake candidates are forcing tighter hiring controls",
+      "blurb": "Practitioner concerns and legal guidance are pushing employers toward stronger identity and screening checks for remote and technical roles.",
       "source": "HR Dive",
       "tier": "trade",
-      "url": "https://www.hrdive.com/news/companies-face-potential-fines-for-ghost-job-postings/822670/",
-      "also": []
+      "url": "https://www.hrdive.com/news/youve-hired-a-fraudulent-employee-what-comes-next/819365/",
+      "also": [
+        "r/recruiting"
+      ],
+      "ts": "2026-07-06T13:01:35+00:00",
+      "last_seen": "2026-07-06"
     },
     {
-      "time": "Jun 11",
-      "headline": "Twenty attorneys general sued over the federal contractor DEI order",
-      "blurb": "HR Dive reports that the plaintiffs say the Trump administration order is both unclear and disruptive for state and contractor policy efforts.",
-      "source": "HR Dive",
+      "key": "manager-engagement-strain-gallup",
+      "headline": "Gallup says manager engagement drove much of the latest workplace decline",
+      "blurb": "The sharpest drop in engagement came from managers, putting leadership strain and workload design back on the executive agenda.",
+      "source": "Gallup",
       "tier": "trade",
-      "url": "https://www.hrdive.com/news/20-attorneys-general-sue-trump-admin-over-federal-contractor-dei-order/822708/",
-      "also": []
+      "url": "https://www.gallup.com/workplace/697904/state-of-the-global-workplace-global-data.aspx",
+      "also": [],
+      "ts": "2026-07-06T13:01:35+00:00",
+      "last_seen": "2026-07-06"
     },
     {
-      "time": "Jun 11",
-      "headline": "Teradata told employees its 2026 salary-adjustment budget would fund AI investment instead",
-      "blurb": "A company memo reported by Business Insider said annual salary adjustments were being reallocated to AI talent and expertise rather than broad pay increases.",
-      "source": "Business Insider",
-      "tier": "trade",
-      "url": "https://www.businessinsider.com/teradata-pauses-raises-employee-compensation-ai-budget-2026-6",
-      "also": [
-        "AI Driven Talent"
-      ]
-    },
-    {
-      "time": "Jun 9",
-      "headline": "SHRM says recruiting is HR’s most common AI use case, but most teams still do not formally measure results",
-      "blurb": "SHRM’s 2026 AI-in-HR report says recruiting leads HR AI use at 27%, while 56% of HR professionals say their organizations do not formally measure success.",
-      "source": "SHRM",
-      "tier": "trade",
-      "url": "https://www.shrm.org/mena/topics-tools/research/state-of-ai-hr-2026/full-report",
-      "also": [
-        "SHRM Advisor"
-      ]
-    },
-    {
-      "time": "Jun 9",
-      "headline": "AI Driven Talent says May payroll growth masked ongoing AI-related white-collar losses",
-      "blurb": "The June 9 issue pairs May's 172,000 payroll gain with Goldman Sachs' estimate of 25,000 knowledge-worker job losses a month, Salesforce's 15,000-person engineering hiring freeze, and BCG's 66% AI-productivity-waste finding.",
-      "source": "AI Driven Talent",
-      "tier": "trade",
-      "url": "https://talentnews.substack.com/p/ai-erased-25000-jobs-last-monthmays",
-      "also": []
-    },
-    {
-      "time": "Jun 5",
-      "headline": "BLS says U.S. payrolls rose by 172,000 in May and unemployment held at 4.3%",
-      "blurb": "May hiring remained positive, with gains led by leisure and hospitality, local government, and health care.",
-      "source": "BLS",
-      "tier": "wire",
-      "url": "https://www.bls.gov/news.release/archives/empsit_06052026.htm",
-      "also": [
-        "SHRM"
-      ]
-    },
-    {
-      "time": "Jun 2",
-      "headline": "JOLTS reports 7.6 million job openings in April while hires slipped",
-      "blurb": "Openings increased in April, but hires and total separations both moved lower, keeping attention on a harder matching environment.",
-      "source": "BLS",
-      "tier": "wire",
-      "url": "https://www.bls.gov/news.release/archives/jolts_06022026.htm",
-      "also": [
-        "SHRM"
-      ]
-    },
-    {
-      "time": "Jun 4",
-      "headline": "May job cuts reached the highest total for that month since 2020, with AI the top cited reason",
-      "blurb": "Challenger said planned May cuts rose to 97,006 and that AI was the leading stated reason for a third straight month.",
-      "source": "Challenger",
-      "tier": "wire",
-      "url": "https://www.challengergray.com/blog/challenger-report-may-job-cuts-rise-16-from-april-highest-may-total-since-2020/",
-      "also": [
-        "Axios",
-        "AP"
-      ]
-    },
-    {
-      "time": "Jun 5",
-      "headline": "The European Commission published fresh pay transparency guidance ahead of the June 7 deadline",
-      "blurb": "The guidance puts equal-pay compliance closer to everyday hiring, pay-range, and employee-information practices.",
+      "key": "pay-transparency-operating-model",
+      "headline": "Pay transparency is shifting from deadline coverage into operating model work",
+      "blurb": "Attention has moved to salary-range disclosure, pay-gap reporting, manager guidance, and how rewards and recruiting line up in practice.",
       "source": "European Commission",
       "tier": "wire",
       "url": "https://commission.europa.eu/news-and-media/news/new-eu-rules-pay-transparency-explained-2026-06-05_en",
-      "also": []
+      "also": [
+        "Mercer"
+      ],
+      "ts": "2026-07-06T13:01:35+00:00",
+      "last_seen": "2026-07-06"
     },
     {
-      "time": "Jun 4",
-      "headline": "HR Leaders says AI capability building is becoming a core HR leadership task",
-      "blurb": "The latest episode centers on literacy, leader upskilling, visible use cases, and HR teams removing low-value work without stepping away from employee trust.",
-      "source": "HR Leaders",
-      "tier": "trade",
-      "url": "https://hrleaders.co/podcast/the-ai-shift-every-hr-leader-needs-to-prepare-for-in-2026",
-      "also": []
-    },
-    {
-      "time": "May 14",
-      "headline": "Colorado's rewritten AI law shifts employment compliance toward notices and recordkeeping",
-      "blurb": "The updated law points employers toward disclosure and documentation duties tied to automated decision tools, with employment obligations starting January 1, 2027.",
+      "key": "colorado-ai-law-employment-recordkeeping",
+      "headline": "Colorado's rewritten AI law points employers toward notices and recordkeeping",
+      "blurb": "The updated law gives employers more time, but the practical direction for employment-related AI use is clearer: document the tool and explain the use.",
       "source": "Ogletree",
       "tier": "trade",
       "url": "https://ogletree.com/insights-resources/blog-posts/multistage-notices-under-colorados-revamped-ai-act/",
       "also": [
         "IAPP"
-      ]
+      ],
+      "ts": "2026-07-06T13:01:35+00:00",
+      "last_seen": "2026-07-06"
     },
     {
-      "time": "Apr",
-      "headline": "Gallup says manager engagement drove much of the latest global workplace decline",
-      "blurb": "Gallup's 2026 State of the Global Workplace said global engagement fell to 20% in 2025, with the sharpest decline showing up among managers.",
-      "source": "Gallup",
-      "tier": "trade",
-      "url": "https://www.gallup.com/workplace/697904/state-of-the-global-workplace-global-data.aspx",
-      "also": []
-    },
-    {
-      "time": "May 6",
-      "headline": "HR Dive says deepfaked and fraudulent candidates are forcing tighter hiring controls",
-      "blurb": "Attorneys told HR Dive that fake profiles and remote hiring fraud are pushing employers toward stronger identity and screening checks.",
+      "key": "candidate-fraud-monthly-risk",
+      "headline": "Candidate fraud remains a durable hiring-control problem",
+      "blurb": "Coverage keeps returning to identity risks, stand-ins, and remote interview abuse, especially for technical roles.",
       "source": "HR Dive",
       "tier": "trade",
       "url": "https://www.hrdive.com/news/youve-hired-a-fraudulent-employee-what-comes-next/819365/",
-      "also": []
-    },
-    {
-      "time": "Jun 1",
-      "headline": "Hung Lee says recruiters still matter most in five high-judgment situations",
-      "blurb": "Issue 270 keeps the focus on live calibration, emotional context, and high-stakes decisions for candidates and employers, while also tracking candidate fraud and current recruiting events.",
-      "source": "LinkedIn",
-      "tier": "social",
-      "url": "https://www.linkedin.com/pulse/week-recruiting-issue-270-hung-lee-hj3ee/",
-      "also": []
+      "also": [
+        "r/sysadmin"
+      ],
+      "ts": "2026-07-06T13:01:35+00:00",
+      "last_seen": "2026-07-06"
     }
   ],
   "watch": {
     "label": "Worth watching next",
-    "text": "Watch whether the softer CEO rhetoric on AI jobs starts to diverge even further from layoff trackers, worker anxiety, and the still-weak hiring picture.",
-    "url": "https://www.wsj.com/tech/ai/ai-workers-tech-ceos-job-losses-afc71e15"
+    "text": "Fresh July labor-market reporting is holding up better than the layoff mood suggests, but the split between AI optimism and worker anxiety is getting sharper.",
+    "url": "https://www.wsj.com/economy/jobs/this-years-job-market-is-shaping-up-to-be-surprisingly-stable-e337c98b"
   }
 }
     </script>
@@ -927,10 +752,7 @@
         return n;
       };
       const esc = (s) => (s == null ? "" : String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])));
-      const linkList = (arr) => arr.map((s) => {
-        const label = s.headline ? `${s.name} — ${s.headline}` : s.name;
-        return `<a href="${esc(s.url)}">${esc(label)}</a>`;
-      }).join(", ");
+      const linkList = (arr) => arr.map((s) => `<a href="${esc(s.url)}">${esc(s.name)}</a>`).join(", ");
       const relTime = (ts, fallback) => {
         if (!ts) return fallback || "";
         const d = new Date(ts);
@@ -994,7 +816,6 @@
         if (s.lastActivity) bits.push("last reply " + esc(s.lastActivity));
         if (bits.length) card.appendChild(el("div", "live-meta", bits.join(" &middot; ")));
         card.appendChild(el("p", null, esc(s.summary)));
-        if (s.quote && s.quote.text) card.appendChild(el("blockquote", "social-quote", "&ldquo;" + esc(s.quote.text) + "&rdquo;" + (s.quote.attribution ? ' <span class=\"also\">&mdash; ' + esc(s.quote.attribution) + "</span>" : "")));
         if (s.sentiment) card.appendChild(el("p", "sentiment", "<strong>Mood:</strong> " + esc(s.sentiment)));
         if (s.threads && s.threads.length) card.appendChild(el("div", "sources", "<strong>Posts:</strong> " + linkList(s.threads)));
         return card;
@@ -1037,7 +858,7 @@
       const panelsEl = document.getElementById("panels");
       const ranges = DATA.ranges || {};
       const defs = [
-        { id: "today", label: "Today", note: "Breaking, last 24 to 48 hours. New movement first, durable themes just below." },
+        { id: "today", label: "Today", note: "Breaking, last 24 to 48 hours." },
         { id: "week", label: "Last week", note: "Trending across the past 7 days." },
         { id: "month", label: "Last month", note: "Durable themes, research, and regulation over 30 days." },
         { id: "social", label: "Social", note: "Live discussions from the last few days. Shows when each was posted and last active." },
@@ -1075,23 +896,16 @@
           panel.appendChild(wrap);
         } else if (d.id === "today") {
           const fresh = ranges.freshToday || [];
-          const carry = ranges.stillFresh || [];
-          const renderTopicSection = (title, note, items, startIndex) => {
-            const wrap = el("section", "subsection");
-            const head = el("div", "subsection-head");
-            head.appendChild(el("h3", "subsection-title", esc(title)));
-            if (note) head.appendChild(el("div", "subsection-note", esc(note)));
-            wrap.appendChild(head);
-            if (items.length) {
-              items.forEach((t, i) => wrap.appendChild(topicCard(t, startIndex + i)));
-            } else {
-              wrap.appendChild(el("p", "range-note", "Nothing new cleared the bar in this lane today."));
-            }
-            return wrap;
-          };
-          panel.appendChild(renderTopicSection("Fresh today", "New or materially updated topics from the last 24 to 48 hours.", fresh, 0));
-          panel.appendChild(renderTopicSection("Still fresh", "The bigger ongoing stories still running hot.", carry, fresh.length));
-          if (!fresh.length && !carry.length) panel.appendChild(el("p", "range-note", "Nothing in this window. Try a deep run to reach further back."));
+          const still = ranges.stillFresh || [];
+          if (fresh.length) {
+            panel.appendChild(el("div", "count", "Fresh today"));
+            fresh.forEach((t, i) => panel.appendChild(topicCard(t, i)));
+          }
+          if (still.length) {
+            panel.appendChild(el("div", "count", "Still fresh"));
+            still.forEach((t, i) => panel.appendChild(topicCard(t, fresh.length + i)));
+          }
+          if (!fresh.length && !still.length) panel.appendChild(el("p", "range-note", "Nothing in this window. Try a deep run to reach further back."));
         } else {
           (ranges[d.id] || []).forEach((t, i) => panel.appendChild(topicCard(t, i)));
           if (!(ranges[d.id] || []).length) panel.appendChild(el("p", "range-note", "Nothing in this window. Try a deep run to reach further back."));
