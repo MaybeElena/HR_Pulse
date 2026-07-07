@@ -129,6 +129,10 @@
 
       /* Newsletter cards */
       .cadence { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; background: rgba(255,255,255,0.05); color: var(--muted); }
+      .cat-tag { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; }
+      .cat-tag.event { background: rgba(92, 135, 255, 0.14); color: #cdddff; }
+      .cat-tag.regulatory { background: rgba(255, 213, 140, 0.12); color: var(--quote); }
+      .cat-tag.data-release { background: rgba(140, 230, 161, 0.10); color: var(--rising); }
       .issue-meta { color: var(--muted); font-size: 0.88rem; margin: 6px 0 12px; }
       .issue-meta strong { color: var(--text); }
 
@@ -194,12 +198,19 @@
                   issue appeared since last run (from nl-update). Summarize in
                   your own words, skip vendor product pitches, link-only if the
                   issue cannot be retrieved.
+        events  : at most 12 tracked conference or regulatory cards pulled from
+                  `events-show`. Use only the ledger fields:
+                  id, name, date_start, date_end, location, why, url, group,
+                  last_verified, date_confidence. Do not render last_verified.
+        dataReleases : recurring official releases from `events-show` where
+                  recurring=true. Render as a compact strip only: name + next
+                  date, with a ~ prefix when date_confidence is month.
         feed    : the persisted rolling buffer from `ledger.py feed-show`, NOT
                   just today's gather. Each row: key, headline, blurb
                   (information only, do NOT name the source), source, tier, url,
                   also, ts. Deduped, canonical = most reliable source. The page
                   ages each row from ts, so a 2-day-old story reads "2d ago".
-        watch   : the "Worth watching next" footer. Keep it.
+        watch   : optional near-term calendar footer. Render only when an event, regulatory milestone, or data release falls within the next 7 days. Use item rows only; no free-form editorial note.
       Write like an industry journalist: plain, concrete, informative, HR/TM
       terms intact. No fluff, no meta, no editorializing. Never paste paragraphs.
       ===========================================================================
@@ -494,38 +505,36 @@
   },
   "social": [
     {
-      "title": "Managers are still getting called out for distrusting remote teams that hit their targets",
+      "title": "Recruiters are testing GitHub as a cleaner sourcing signal for AI engineers",
       "platforms": [
-        "Career-coach post",
-        "Workplace proxy coverage"
+        "r/recruiting"
       ],
-      "posted": "recent proxy coverage",
-      "lastActivity": "still circulating",
-      "liveness": "slowing",
-      "summary": "A workplace post that keeps getting shared argues the real problem is not remote performance but managerial discomfort when teams are productive without being seen in person.",
-      "sentiment": "Frustrated, validating HR pushback on unnecessary return orders",
+      "posted": "1d ago",
+      "lastActivity": "",
+      "liveness": "",
+      "summary": "One recruiter says LinkedIn feels too noisy for AI-engineer sourcing and that GitHub activity, recent repos, and topic patterns feel like a harder-to-fake signal. The strongest response says GitHub is useful for personalization and prioritization, but not as a complete filter because many strong engineers work in private repos.",
+      "sentiment": "Curious, practical, mixed on signal quality",
       "threads": [
         {
-          "name": "Manager dislikes WFH despite employees meeting targets",
-          "url": "https://m.economictimes.com/magazines/panache/i-dont-know-if-theyre-really-working-manager-dislikes-wfh-despite-employees-meeting-all-targets-hrs-blunt-response-goes-viral/articleshow/131922921.cms"
+          "name": "Has anyone tried GitHub as sourcing signal for AI engineers??",
+          "url": "https://www.reddit.com/r/recruiting/comments/1u5gyzk/has_anyone_tried_github_as_sourcing_signal_for_ai/"
         }
       ]
     },
     {
-      "title": "Burnout, humiliation, and no-boundary work cultures are still spreading as cautionary examples",
+      "title": "Agency burnout is turning into a career-exit conversation, not just a bad-quarter complaint",
       "platforms": [
-        "Instagram post",
-        "Workplace proxy coverage"
+        "r/recruiting"
       ],
-      "posted": "recent proxy coverage",
-      "lastActivity": "still circulating",
-      "liveness": "slowing",
-      "summary": "A viral career-coach post keeps getting cited for three normalized workplace habits that readers say HR leaders should stop treating as normal: burnout signaling, public humiliation, and permanent availability.",
-      "sentiment": "Exhausted, blunt, pushing for boundaries",
+      "posted": "3d ago",
+      "lastActivity": "",
+      "liveness": "",
+      "summary": "A veteran agency recruiter describes collapsing client demand, unrealistic KPIs, and mounting anxiety while trying to move into internal talent roles. Replies argue the market is still saturated, internal moves are often lateral or lower-paid, and for some recruiters the main decision is whether to leave agency or leave the field entirely.",
+      "sentiment": "Burnt out, candid, looking for exits",
       "threads": [
         {
-          "name": "Burnout, humiliation, and no boundaries",
-          "url": "https://m.economictimes.com/news/new-updates/burnout-humiliation-and-no-boundaries-viral-post-lists-3-toxic-workplace-habits-that-have-been-normalised-for-too-long/articleshow/131925591.cms"
+          "name": "Agency Burnout and Job Searching",
+          "url": "https://www.reddit.com/r/recruiting/comments/1u52mv3/agency_burnout_and_job_searching/"
         }
       ]
     }
@@ -594,71 +603,12 @@
   ],
   "feed": [
     {
-      "key": "virginia-high-paying-jobs-ai-exposed",
-      "headline": "Axios says Virginia's best-paying jobs are the most exposed to AI change",
-      "blurb": "Virginia Works says the jobs with the biggest AI exposure are higher-paid knowledge roles, while human skills and training are becoming the main adaptation story.",
-      "source": "Axios Richmond",
-      "tier": "trade",
-      "url": "https://www.axios.com/local/richmond/2026/07/06/virginia-ai-workforce-report-high-paying-jobs-workplace-adoption-training",
-      "also": [],
-      "ts": "2026-07-07T09:25:23+00:00",
-      "last_seen": "2026-07-07"
-    },
-    {
-      "key": "microsoft-cuts-sales-xbox-ai-spend",
-      "headline": "Business Insider says Microsoft is cutting about 4,800 jobs while AI spending keeps climbing",
-      "blurb": "Most of the cuts hit sales and Xbox, putting cost pressure and AI-capex tradeoffs back at the center of the labor story.",
-      "source": "Business Insider",
-      "tier": "trade",
-      "url": "https://www.businessinsider.com/microsoft-jobs-cuts-across-sales-and-xbox-read-the-memo-2026-7",
-      "also": [],
-      "ts": "2026-07-07T09:25:23+00:00",
-      "last_seen": "2026-07-07"
-    },
-    {
-      "key": "data-center-trades-ai-bottleneck",
-      "headline": "Axios says Meta and Google are training skilled trades because labor bottlenecks threaten AI build-outs",
-      "blurb": "New training commitments in Virginia show the AI labor story is not just about white-collar disruption but also about hard-to-fill construction and infrastructure roles.",
-      "source": "Axios Richmond",
-      "tier": "trade",
-      "url": "https://www.axios.com/local/richmond/2026/07/06/meta-google-data-center-jobs-skilled-trades-training-richmond-henrico-chesterfield",
-      "also": [],
-      "ts": "2026-07-07T09:25:23+00:00",
-      "last_seen": "2026-07-07"
-    },
-    {
-      "key": "ai-driven-talent-regret-rehire",
-      "headline": "AI Driven Talent says many employers now regret AI-linked layoffs and are quietly rehiring",
-      "blurb": "The latest issue says 55% of bosses regret cuts they framed around AI, while labor-market data still shows a weaker but not broken hiring picture.",
-      "source": "AI Driven Talent",
-      "tier": "trade",
-      "url": "https://talentnews.substack.com/p/55-of-bosses-regret-their-ai-layoffs",
-      "also": [
-        "CNBC"
-      ],
-      "ts": "2026-07-07T09:25:23+00:00",
-      "last_seen": "2026-07-07"
-    },
-    {
       "key": "tech-leaders-flip-on-ai-jobs-message",
       "headline": "WSJ says big tech leaders have flipped to a more optimistic AI jobs message",
       "blurb": "Top AI leaders are now talking more about productivity and new work creation than immediate job wipeout, even as layoffs and spending pressure continue.",
       "source": "WSJ",
       "tier": "trade",
       "url": "https://www.wsj.com/tech/ai/ai-workers-tech-ceos-job-losses-afc71e15",
-      "also": [
-        "Axios"
-      ],
-      "ts": "2026-07-07T09:25:23+00:00",
-      "last_seen": "2026-07-07"
-    },
-    {
-      "key": "job-market-surprisingly-stable-wsj-july",
-      "headline": "WSJ says the job market is holding up better than expected even after a weak June report",
-      "blurb": "June payroll growth slowed sharply, but the labor market still looks softer rather than broken.",
-      "source": "WSJ",
-      "tier": "trade",
-      "url": "https://www.wsj.com/economy/jobs/this-years-job-market-is-shaping-up-to-be-surprisingly-stable-e337c98b",
       "also": [
         "Axios"
       ],
@@ -673,6 +623,19 @@
       "tier": "trade",
       "url": "https://www.businessinsider.com/goldman-sachs-economist-predicts-ai-displacing-15-million-jobs-2026-7",
       "also": [],
+      "ts": "2026-07-07T09:25:23+00:00",
+      "last_seen": "2026-07-07"
+    },
+    {
+      "key": "job-market-surprisingly-stable-wsj-july",
+      "headline": "WSJ says the job market is holding up better than expected even after a weak June report",
+      "blurb": "June payroll growth slowed sharply, but the labor market still looks softer rather than broken.",
+      "source": "WSJ",
+      "tier": "trade",
+      "url": "https://www.wsj.com/economy/jobs/this-years-job-market-is-shaping-up-to-be-surprisingly-stable-e337c98b",
+      "also": [
+        "Axios"
+      ],
       "ts": "2026-07-07T09:25:23+00:00",
       "last_seen": "2026-07-07"
     },
@@ -725,13 +688,322 @@
       ],
       "ts": "2026-07-07T09:25:23+00:00",
       "last_seen": "2026-07-07"
+    },
+    {
+      "key": "virginia-high-paying-jobs-ai-exposed",
+      "headline": "Axios says Virginia's best-paying jobs are the most exposed to AI change",
+      "blurb": "Virginia Works says the jobs with the biggest AI exposure are higher-paid knowledge roles, while human skills and training are becoming the main adaptation story.",
+      "source": "Axios Richmond",
+      "tier": "trade",
+      "url": "https://www.axios.com/local/richmond/2026/07/06/virginia-ai-workforce-report-high-paying-jobs-workplace-adoption-training",
+      "also": [],
+      "ts": "2026-07-07T09:25:23+00:00",
+      "last_seen": "2026-07-07"
+    },
+    {
+      "key": "microsoft-cuts-sales-xbox-ai-spend",
+      "headline": "Business Insider says Microsoft is cutting about 4,800 jobs while AI spending keeps climbing",
+      "blurb": "Most of the cuts hit sales and Xbox, putting cost pressure and AI-capex tradeoffs back at the center of the labor story.",
+      "source": "Business Insider",
+      "tier": "trade",
+      "url": "https://www.businessinsider.com/microsoft-jobs-cuts-across-sales-and-xbox-read-the-memo-2026-7",
+      "also": [],
+      "ts": "2026-07-07T09:25:23+00:00",
+      "last_seen": "2026-07-07"
+    },
+    {
+      "key": "data-center-trades-ai-bottleneck",
+      "headline": "Axios says Meta and Google are training skilled trades because labor bottlenecks threaten AI build-outs",
+      "blurb": "New training commitments in Virginia show the AI labor story is not just about white-collar disruption but also about hard-to-fill construction and infrastructure roles.",
+      "source": "Axios Richmond",
+      "tier": "trade",
+      "url": "https://www.axios.com/local/richmond/2026/07/06/meta-google-data-center-jobs-skilled-trades-training-richmond-henrico-chesterfield",
+      "also": [],
+      "ts": "2026-07-07T09:25:23+00:00",
+      "last_seen": "2026-07-07"
+    },
+    {
+      "key": "ai-driven-talent-regret-rehire",
+      "headline": "AI Driven Talent says many employers now regret AI-linked layoffs and are quietly rehiring",
+      "blurb": "The latest issue says 55% of bosses regret cuts they framed around AI, while labor-market data still shows a weaker but not broken hiring picture.",
+      "source": "AI Driven Talent",
+      "tier": "trade",
+      "url": "https://talentnews.substack.com/p/55-of-bosses-regret-their-ai-layoffs",
+      "also": [
+        "CNBC"
+      ],
+      "ts": "2026-07-07T09:25:23+00:00",
+      "last_seen": "2026-07-07"
+    },
+    {
+      "key": "ai-hiring-study-complicates-layoff-story",
+      "headline": "Business Insider says new AI hiring data complicates the usual layoff narrative",
+      "blurb": "Ramp and Revelio Labs say AI-heavy firms were more likely to grow headcount and entry-level hiring, even though the productivity case is still mixed.",
+      "source": "Business Insider",
+      "tier": "trade",
+      "url": "https://www.businessinsider.com/the-ai-layoffs-story-just-got-more-complicated-2026-6",
+      "also": [],
+      "ts": "2026-07-06T13:01:35+00:00",
+      "last_seen": "2026-07-06"
+    },
+    {
+      "key": "raise-us-worker-transition-fund",
+      "headline": "Axios says tech firms are now funding AI workforce-transition programs instead of just warning about disruption",
+      "blurb": "Raise Us starts with wage-insurance, retraining, coaching, and credential experiments in four states, backed by major AI and tech companies.",
+      "source": "Axios",
+      "tier": "trade",
+      "url": "https://www.axios.com/2026/06/25/anthropic-labor-market-ai-jobs-crisis",
+      "also": [],
+      "ts": "2026-07-06T13:01:35+00:00",
+      "last_seen": "2026-07-06"
+    },
+    {
+      "key": "layoff-tracker",
+      "headline": "Business Insider's 2026 layoff tracker says AI-linked cuts now span nearly 40 companies",
+      "blurb": "The updated tracker shows how often companies are pairing AI-efficiency language with cuts to administrative and white-collar roles while shifting resources into automation and technical capacity.",
+      "source": "Business Insider",
+      "tier": "trade",
+      "url": "https://www.businessinsider.com/recent-company-layoffs-laying-off-workers-2026",
+      "also": [],
+      "ts": "2026-07-06T13:01:35+00:00",
+      "last_seen": "2026-07-06"
+    },
+    {
+      "key": "candidate-fraud-monthly-risk",
+      "headline": "Candidate fraud remains a durable hiring-control problem",
+      "blurb": "Coverage keeps returning to identity risks, stand-ins, and remote interview abuse, especially for technical roles.",
+      "source": "HR Dive",
+      "tier": "trade",
+      "url": "https://www.hrdive.com/news/youve-hired-a-fraudulent-employee-what-comes-next/819365/",
+      "also": [
+        "r/sysadmin"
+      ],
+      "ts": "2026-07-06T13:01:35+00:00",
+      "last_seen": "2026-07-06"
     }
   ],
-  "watch": {
-    "label": "Worth watching next",
-    "text": "The AI labor story is splitting in two directions at once: regional white-collar exposure is getting more concrete, while the infrastructure build-out is creating very human labor bottlenecks in skilled trades.",
-    "url": "https://www.axios.com/local/richmond/2026/07/06/virginia-ai-workforce-report-high-paying-jobs-workplace-adoption-training"
-  }
+  "events": [
+    {
+      "id": "eu-ai-act-high-risk-obligations-2026",
+      "name": "EU AI Act - high-risk obligations for HR/hiring systems",
+      "date_start": "2026-08-02",
+      "date_end": null,
+      "location": "",
+      "why": "A major application milestone likely to drive legal-press coverage and compliance claims.",
+      "url": "https://artificialintelligenceact.eu/implementation-timeline/",
+      "group": "regulatory",
+      "last_verified": "2026-07-07",
+      "date_confidence": "exact",
+      "recurring": false
+    },
+    {
+      "id": "linkedin-talent-connect-2026",
+      "name": "LinkedIn Talent Connect",
+      "date_start": "2026-10",
+      "date_end": null,
+      "location": "New York, USA",
+      "why": "Talent-market data and hiring product announcements.",
+      "url": "https://www.linkedintalentconnect.com/",
+      "group": "industry",
+      "last_verified": null,
+      "date_confidence": "month",
+      "recurring": false
+    },
+    {
+      "id": "successconnect-2026",
+      "name": "SuccessConnect (SAP)",
+      "date_start": "2026-10-05",
+      "date_end": "2026-10-07",
+      "location": "Las Vegas, USA",
+      "why": "Major HXM and AI product announcements expected.",
+      "url": "https://www.sap.com/events/connect.html",
+      "group": "industry",
+      "last_verified": null,
+      "date_confidence": "exact",
+      "recurring": false
+    },
+    {
+      "id": "workday-rising-us-2026",
+      "name": "Workday Rising US",
+      "date_start": "2026-10-12",
+      "date_end": "2026-10-15",
+      "location": "Las Vegas, Nevada",
+      "why": "Flagship HCM event; AI product news and customer stories.",
+      "url": "https://rising.workday.com/us.html",
+      "group": "industry",
+      "last_verified": "2026-07-07",
+      "date_confidence": "exact",
+      "recurring": false
+    },
+    {
+      "id": "hr-technology-conference-2026",
+      "name": "HR Technology Conference & Exposition",
+      "date_start": "2026-10-20",
+      "date_end": "2026-10-22",
+      "location": "Mandalay Bay, Las Vegas",
+      "why": "The biggest HR tech stage of the year; announcements often cluster here.",
+      "url": "https://www.hrtechnologyconference.com/",
+      "group": "industry",
+      "last_verified": "2026-07-07",
+      "date_confidence": "exact",
+      "recurring": false
+    },
+    {
+      "id": "unleash-world-2026",
+      "name": "UNLEASH World",
+      "date_start": "2026-10-20",
+      "date_end": "2026-10-22",
+      "location": "Paris, France",
+      "why": "Leading European HR tech gathering with strong analyst and press presence.",
+      "url": "https://www.unleash.ai/unleashworld/",
+      "group": "industry",
+      "last_verified": "2026-07-07",
+      "date_confidence": "exact",
+      "recurring": false
+    },
+    {
+      "id": "workday-rising-emea-2026",
+      "name": "Workday Rising EMEA",
+      "date_start": "2026-11-17",
+      "date_end": "2026-11-19",
+      "location": "Barcelona, Spain",
+      "why": "European counterpart of Rising; regional announcements.",
+      "url": "https://rising.workday.com/emea.html",
+      "group": "industry",
+      "last_verified": null,
+      "date_confidence": "exact",
+      "recurring": false
+    },
+    {
+      "id": "avature-upfront-2026",
+      "name": "Avature Upfront 2026",
+      "date_start": "",
+      "date_end": null,
+      "location": "TBC",
+      "why": "Avature's own conference; sessions and product announcements.",
+      "url": "https://www.avature.net/upfront/",
+      "group": "industry",
+      "last_verified": null,
+      "date_confidence": "tbc",
+      "recurring": false
+    },
+    {
+      "id": "gartner-reimaginehr-2026",
+      "name": "Gartner ReimagineHR",
+      "date_start": "",
+      "date_end": null,
+      "location": "TBC",
+      "why": "Agenda-setting analyst event for HR leaders; research releases often land here.",
+      "url": "https://www.gartner.com/en/conferences/calendar",
+      "group": "industry",
+      "last_verified": null,
+      "date_confidence": "tbc",
+      "recurring": false
+    },
+    {
+      "id": "recfest-2026",
+      "name": "RecFest",
+      "date_start": "",
+      "date_end": null,
+      "location": "TBC",
+      "why": "Largest TA festival; a concentrated read on recruiting-community sentiment.",
+      "url": "https://recfest.com/",
+      "group": "industry",
+      "last_verified": null,
+      "date_confidence": "tbc",
+      "recurring": false
+    },
+    {
+      "id": "eeoc-us-state-ai-hiring-rules",
+      "name": "EEOC / US state AI-hiring rules",
+      "date_start": "",
+      "date_end": null,
+      "location": "",
+      "why": "State-level AI hiring rules keep landing, creating new effective dates and compliance deadlines.",
+      "url": "",
+      "group": "regulatory",
+      "last_verified": null,
+      "date_confidence": "tbc",
+      "recurring": false
+    }
+  ],
+  "dataReleases": [
+    {
+      "id": "eurostat-unemployment",
+      "name": "Eurostat unemployment (euro area)",
+      "date_start": "",
+      "date_end": null,
+      "location": "",
+      "why": "the European labor-market headline of the month",
+      "url": "https://ec.europa.eu/eurostat/web/main/news/release-calendar",
+      "group": "industry",
+      "last_verified": null,
+      "date_confidence": "month",
+      "recurring": true,
+      "rule": "monthly, per Eurostat release calendar",
+      "next_date": "2026-08-03"
+    },
+    {
+      "id": "jolts-us",
+      "name": "JOLTS (US job openings and turnover)",
+      "date_start": "",
+      "date_end": null,
+      "location": "",
+      "why": "openings and quits-rate stories come from here",
+      "url": "https://www.bls.gov/schedule/news_release/jolts.htm",
+      "group": "industry",
+      "last_verified": null,
+      "date_confidence": "month",
+      "recurring": true,
+      "rule": "monthly, per BLS schedule (about a month lagged)",
+      "next_date": "2026-08-03"
+    },
+    {
+      "id": "adp-national-employment-report",
+      "name": "ADP National Employment Report",
+      "date_start": "",
+      "date_end": null,
+      "location": "",
+      "why": "the private-payrolls preview story",
+      "url": "https://adpemploymentreport.com/",
+      "group": "industry",
+      "last_verified": null,
+      "date_confidence": "exact",
+      "recurring": true,
+      "rule": "monthly, two days before the BLS jobs report",
+      "next_date": "2026-08-05"
+    },
+    {
+      "id": "challenger-job-cuts",
+      "name": "Challenger job cuts report",
+      "date_start": "",
+      "date_end": null,
+      "location": "",
+      "why": "feeds the layoff tracker directly",
+      "url": "https://www.challengergray.com/press/press-releases/",
+      "group": "industry",
+      "last_verified": null,
+      "date_confidence": "exact",
+      "recurring": true,
+      "rule": "monthly, usually the day before the jobs report",
+      "next_date": "2026-08-06"
+    },
+    {
+      "id": "bls-employment-situation",
+      "name": "BLS Employment Situation (US jobs report)",
+      "date_start": "",
+      "date_end": null,
+      "location": "",
+      "why": "the biggest recurring HR news event; expect coverage the same day",
+      "url": "https://www.bls.gov/schedule/news_release/empsit.htm",
+      "group": "industry",
+      "last_verified": null,
+      "date_confidence": "exact",
+      "recurring": true,
+      "rule": "first Friday monthly",
+      "next_date": "2026-08-07"
+    }
+  ]
 }
     </script>
 
@@ -835,6 +1107,82 @@
         return card;
       }
 
+      function formatEventDate(evt) {
+        const start = evt.date_start || "";
+        const end = evt.date_end || "";
+        if (!start) return "date TBC";
+        if (evt.date_confidence === "month" && /^\d{4}-\d{2}$/.test(start)) {
+          const d = new Date(start + "-01T00:00:00");
+          if (!isNaN(d)) return d.toLocaleDateString(undefined, { month: "long", year: "numeric" });
+        }
+        if (/^\d{4}-\d{2}-\d{2}$/.test(start)) {
+          const s = new Date(start + "T00:00:00");
+          if (!isNaN(s)) {
+            if (/^\d{4}-\d{2}-\d{2}$/.test(end)) {
+              const e = new Date(end + "T00:00:00");
+              if (!isNaN(e)) {
+                if (s.getFullYear() === e.getFullYear() && s.getMonth() === e.getMonth()) {
+                  return s.toLocaleDateString(undefined, { month: "long", day: "numeric" }) + "-" + e.getDate() + ", " + e.getFullYear();
+                }
+                return s.toLocaleDateString(undefined, { month: "long", day: "numeric", year: "numeric" }) + " - " + e.toLocaleDateString(undefined, { month: "long", day: "numeric", year: "numeric" });
+              }
+            }
+            return s.toLocaleDateString(undefined, { month: "long", day: "numeric", year: "numeric" });
+          }
+        }
+        return start;
+      }
+
+      function isThisWeekEvent(evt) {
+        if (!evt.date_start || !/^\d{4}-\d{2}-\d{2}$/.test(evt.date_start)) return false;
+        const base = new Date(DATA.date || "");
+        const start = new Date(evt.date_start + "T00:00:00");
+        if (isNaN(base) || isNaN(start)) return false;
+        const diff = Math.round((start.getTime() - base.getTime()) / 86400000);
+        return Math.abs(diff) <= 7;
+      }
+
+      function formatCalendarDate(item) {
+        const raw = item.kind === "data-release" ? (item.next_date || "") : (item.date_start || "");
+        if (!raw) return item.kind === "tbc" ? "Date TBC" : "date TBC";
+        if ((item.date_confidence === "month" && /^\d{4}-\d{2}$/.test(raw))) {
+          const d = new Date(raw + "-01T00:00:00");
+          return !isNaN(d) ? d.toLocaleDateString(undefined, { month: "short", year: "numeric" }) : raw;
+        }
+        if (item.kind === "data-release" && item.date_confidence === "month" && /^\d{4}-\d{2}-\d{2}$/.test(raw)) {
+          const d = new Date(raw + "T00:00:00");
+          return !isNaN(d) ? "~" + d.toLocaleDateString(undefined, { month: "short", day: "numeric" }) : "~" + raw;
+        }
+        if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
+          const d = new Date(raw + "T00:00:00");
+          return !isNaN(d) ? d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }) : raw;
+        }
+        if (/^\d{4}-\d{2}$/.test(raw)) {
+          const d = new Date(raw + "-01T00:00:00");
+          return !isNaN(d) ? d.toLocaleDateString(undefined, { month: "short", year: "numeric" }) : raw;
+        }
+        return raw;
+      }
+
+      function calendarRow(item, i) {
+        const row = el("article", "card");
+        row.style.animationDelay = i * 0.04 + "s";
+        const head = el("div", "card-head");
+        head.appendChild(el("h2", null, esc(item.name)));
+        if (item.thisWeek) head.appendChild(el("span", "status", "this week"));
+        const tagCls = item.kind === "data-release" ? "data-release" : (item.group === "regulatory" ? "regulatory" : "event");
+        const tagLabel = item.kind === "data-release" ? "Data release" : (item.group === "regulatory" ? "Regulatory" : "Event");
+        head.appendChild(el("span", "cat-tag " + tagCls, esc(tagLabel)));
+        row.appendChild(head);
+        const bits = [];
+        bits.push("<strong>" + esc(formatCalendarDate(item)) + "</strong>");
+        if (item.location) bits.push(esc(item.location));
+        row.appendChild(el("div", "issue-meta", bits.join(" &middot; ")));
+        if (item.kind !== "data-release" && item.why) row.appendChild(el("p", null, esc(item.why)));
+        if (item.url) row.appendChild(el("div", "sources", `<a href="${esc(item.url)}">Open ${item.kind === "data-release" ? "release" : "item"}</a>`));
+        return row;
+      }
+
       function feedRow(f) {
         const row = el("div", "feed-row");
         row.appendChild(el("div", "feed-time", esc(f.ts ? relTime(f.ts, f.time) : (f.time || ""))));
@@ -859,6 +1207,7 @@
         { id: "month", label: "Last month", note: "Durable themes, research, and regulation over 30 days." },
         { id: "social", label: "Social", note: "Live discussions from the last few days. Shows when each was posted and last active." },
         { id: "newsletters", label: "Newsletters", note: "Latest issue from each newsletter you track." },
+        { id: "events", label: "Calendar", note: "Upcoming events, regulatory dates, and data releases in chronological order." },
         { id: "feed", label: "All news", note: "Every story, deduped, most reliable source first." }
       ];
 
@@ -870,6 +1219,7 @@
         let count = 0;
         if (d.id === "social") count = (DATA.social || []).length;
         else if (d.id === "newsletters") count = (DATA.newsletters || []).length;
+        else if (d.id === "events") count = (DATA.events || []).length + (DATA.dataReleases || []).length;
         else if (d.id === "feed") count = (DATA.feed || []).length;
         else if (d.id === "today") count = (ranges.freshToday || []).length + (ranges.stillFresh || []).length;
         else count = (ranges[d.id] || []).length;
@@ -885,6 +1235,38 @@
         } else if (d.id === "newsletters") {
           (DATA.newsletters || []).forEach((n, i) => panel.appendChild(newsletterCard(n, i)));
           if (!(DATA.newsletters || []).length) panel.appendChild(el("p", "range-note", "No newsletters tracked this run."));
+        } else if (d.id === "events") {
+          const dated = [];
+          const tbc = [];
+          (DATA.events || []).forEach((evt) => {
+            const kind = evt.group === "regulatory" ? "regulatory" : "event";
+            const raw = evt.date_start || "";
+            const item = Object.assign({ kind }, evt);
+            if (!raw) tbc.push(item);
+            else dated.push(item);
+          });
+          (DATA.dataReleases || []).forEach((rel) => dated.push(Object.assign({ kind: "data-release" }, rel)));
+          const keyFor = (item) => {
+            const raw = item.kind === "data-release" ? (item.next_date || "") : (item.date_start || "");
+            if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
+            if (/^\d{4}-\d{2}$/.test(raw)) return raw + "-01";
+            return "9999-99-99";
+          };
+          const all = dated.sort((a,b) => keyFor(a).localeCompare(keyFor(b)) || (a.name || "").localeCompare(b.name || ""));
+          all.forEach((item) => {
+            const raw = item.kind === "data-release" ? item.next_date : item.date_start;
+            if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
+              const d0 = new Date((DATA.date || "") + "T00:00:00");
+              const d1 = new Date(raw + "T00:00:00");
+              item.thisWeek = !isNaN(d0) && !isNaN(d1) && Math.abs(Math.round((d1 - d0) / 86400000)) <= 7;
+            }
+          });
+          all.forEach((item, i) => panel.appendChild(calendarRow(item, i)));
+          if (tbc.length) {
+            panel.appendChild(el("div", "count", "Date TBC"));
+            tbc.sort((a,b) => (a.name || "").localeCompare(b.name || "")).forEach((item, i) => panel.appendChild(calendarRow(Object.assign({ kind: item.group === "regulatory" ? "regulatory" : "event" }, item), all.length + i)));
+          }
+          if (!(DATA.events || []).length && !(DATA.dataReleases || []).length) panel.appendChild(el("p", "range-note", "No calendar items tracked this run."));
         } else if (d.id === "feed") {
           const wrap = el("div", "card");
           (DATA.feed || []).forEach((f) => wrap.appendChild(feedRow(f)));
@@ -923,10 +1305,19 @@
       select("today");
 
       // Watch footer
-      if (DATA.watch && DATA.watch.text) {
+      if (DATA.watch && Array.isArray(DATA.watch.items) && DATA.watch.items.length) {
         const w = document.getElementById("watch");
         w.hidden = false;
-        w.innerHTML = "<strong>" + esc(DATA.watch.label || "Worth watching next") + ":</strong> " + esc(DATA.watch.text) + (DATA.watch.url ? ' <a href="' + esc(DATA.watch.url) + '">Read more</a>.' : "");
+        const rows = DATA.watch.items.map((item) => {
+          const bits = [];
+          if (item.name) bits.push('<strong>' + esc(item.name) + '</strong>');
+          if (item.date) bits.push(esc(item.date));
+          if (item.text) bits.push(esc(item.text));
+          let line = bits.join(' — ');
+          if (item.url) line += ' <a href="' + esc(item.url) + '">Open</a>';
+          return '<div>' + line + '</div>';
+        }).join('');
+        w.innerHTML = '<strong>' + esc(DATA.watch.label || 'Upcoming soon') + ':</strong>' + rows;
       }
     </script>
   </body>
